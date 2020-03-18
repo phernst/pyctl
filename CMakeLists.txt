@@ -101,7 +101,20 @@ add_compile_definitions(_USE_MATH_DEFINES)
 set (PYCTL_SOURCES
     pysrc/pyctl.cpp
     pysrc/ocl.cpp
-    pysrc/ocl/clfileloader.cpp)
+    pysrc/ocl/clfileloader.cpp
+    pysrc/acquisition/acquisitionsetup.cpp
+    pysrc/acquisition/ctsystem.cpp
+    pysrc/acquisition/ctsystembuilder.cpp
+    pysrc/acquisition/trajectories.cpp
+    pysrc/acquisition/abstractpreparestep.cpp
+    pysrc/projectors/abstractprojector.cpp
+    pysrc/projectors/abstractprojectorconfig.cpp
+    pysrc/projectors/raycasterprojector.cpp
+    pysrc/img/chunk2d.cpp
+    pysrc/img/singleviewdata.cpp
+    pysrc/img/projectiondata.cpp
+    pysrc/img/voxelvolume.cpp
+    pysrc/img/spectralvolumedata.cpp)
 
 pybind11_add_module(_ctl MODULE ${PYCTL_SOURCES} ${CTL_SOURCES} ${MOC_FILES})
 target_include_directories(_ctl PRIVATE ${CMAKE_CURRENT_SOURCE_DIR} ${CTL_DIR})

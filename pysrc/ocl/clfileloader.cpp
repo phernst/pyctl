@@ -1,4 +1,3 @@
-#include <pysrc/ocl/clfileloader.h>
 #include <ocl/clfileloader.h>
 #include <pybind11/pybind11.h>
 #include <QString>
