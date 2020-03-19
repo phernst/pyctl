@@ -29,6 +29,8 @@ void init_singleviewdata(py::module& m)
         })
         .def("max", &SingleViewData::max)
         .def("min", &SingleViewData::min)
+        .def("module", static_cast<Chunk2D<float>&(SingleViewData::*)(uint)>
+            (&SingleViewData::module), "i"_a)
         .def("elements_per_module", &SingleViewData::elementsPerModule)
         .def("nb_modules", &SingleViewData::nbModules)
         .def("total_pixel_count", &SingleViewData::totalPixelCount)

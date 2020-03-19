@@ -1,4 +1,5 @@
 #include <pybind11/pybind11.h>
+#include <pybind11/stl.h>
 #include <img/chunk2d.h>
 
 namespace py = pybind11;
@@ -18,13 +19,14 @@ static py::class_<CTL::Chunk2D<T>> createPyChunk2D(py::module& m, const char* na
         .def("dimensions", [](const Chunk2D<T>* self)
         {
             const auto& dims = self->dimensions();
-            auto pydims { py::tuple() };
+            auto pydims { py::tuple(2) };
             pydims[0] = dims.width;
             pydims[1] = dims.height;
             return pydims;
         })
         .def("max", &Chunk2D<T>::max)
         .def("min", &Chunk2D<T>::min)
+        .def("data", static_cast<std::vector<T>&(Chunk2D<T>::*)()>(&Chunk2D<T>::data))
         .def("height", &Chunk2D<T>::height)
         .def("width", &Chunk2D<T>::width)
         .def("fill", &Chunk2D<T>::fill, "fill_value"_a);

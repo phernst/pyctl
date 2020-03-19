@@ -96,7 +96,7 @@ set (CTL_SOURCES ${CTL_SOURCES}
 	
 set (MOC_FILES ${CTL_DIR}/projectors/abstractprojector.h)
 	
-add_compile_definitions(_USE_MATH_DEFINES)
+add_compile_definitions(_USE_MATH_DEFINES QT_NO_DEBUG_OUTPUT)
 
 set (PYCTL_SOURCES
     pysrc/pyctl.cpp

@@ -1,6 +1,24 @@
 import os
-from os.path import join as pjoin
 
+try:
+    from importlib.resources import path
+    cl_path = path('ctl', 'cl_src')
+except ImportError:
+    from importlib_resources import files
+    cl_path = files('ctl') / 'cl_src'
+import atexit
+from contextlib import ExitStack
 import _ctl
 
-_ctl.ocl.ClFileLoader.set_opencl_source_dir(pjoin(os.path.dirname(os.path.abspath(__file__)), 'cl_src'))
+file_manager = ExitStack()
+atexit.register(file_manager.close)
+cl_source_dir = file_manager.enter_context(cl_path)
+
+_ctl.ocl.ClFileLoader.set_opencl_source_dir(str(cl_source_dir.resolve()))
+
+__all__ = [name for name in dir(_ctl) if name[0] != '_']
+
+for name in dir(_ctl):
+    if name[0] == '_':
+        continue
+    globals()[name] = getattr(_ctl, name)

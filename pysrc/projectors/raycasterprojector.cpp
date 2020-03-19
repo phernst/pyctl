@@ -13,7 +13,11 @@ void init_raycasterprojector(py::module& m)
     auto rcp = py::class_<OCL::RayCasterProjector, AbstractProjector>(m, "RayCasterProjector")
         .def(py::init<>())
         .def("configure", &OCL::RayCasterProjector::configure, "setup"_a, "config"_a)
-        .def("project", &OCL::RayCasterProjector::project, "volume"_a);
+        .def("project", &OCL::RayCasterProjector::project, "volume"_a)
+        .def("project", [](OCL::RayCasterProjector* self, const VoxelVolume<float>& volume)
+        {
+            return self->project(volume);
+        }, "volume"_a);
 
     py::class_<OCL::RayCasterProjector::Config, AbstractProjectorConfig>(rcp, "Config")
         .def(py::init<>())
