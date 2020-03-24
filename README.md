@@ -78,9 +78,8 @@ def main():
         sys.exit(-1)
 
     # configure a projector and project volume
-    rc_config = ctl.ocl.RayCasterProjector.Config()  # config with standard settings
-    my_projector = ctl.ocl.RayCasterProjector()      # the projector
-    my_projector.configure(my_carm_setup, rc_config) # configure the projector
+    my_projector = ctl.ocl.RayCasterProjector()      # the projector (uses its default settings)
+    my_projector.configure(my_carm_setup)            # configure the projector
     projections = my_projector.project(volume)       # project
 
     # show the 20th projection

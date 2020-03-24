@@ -68,7 +68,6 @@ set (CTL_SOURCES
     ${CTL_DIR}/processing/modelbasedvolumedecomposer.cpp
     ${CTL_DIR}/projectors/arealfocalspotextension.cpp
     ${CTL_DIR}/projectors/detectorsaturationextension.cpp
-    ${CTL_DIR}/projectors/dynamicprojector.cpp
     ${CTL_DIR}/projectors/poissonnoiseextension.cpp
     ${CTL_DIR}/models/abstractdatamodel.cpp
     ${CTL_DIR}/models/datamodeloperations.cpp
@@ -76,6 +75,10 @@ set (CTL_SOURCES
     ${CTL_DIR}/models/abstractxrayspectrummodel.cpp
     ${CTL_DIR}/acquisition/radiationencoder.cpp
     ${CTL_DIR}/projectors/spectraleffectsextension.cpp
+    ${CTL_DIR}/projectors/projectionpipeline.cpp
+    ${CTL_DIR}/projectors/projectorextension.cpp
+    ${CTL_DIR}/projectors/dynamicprojectorextension.cpp
+    ${CTL_DIR}/img/lineardynamicvolume.cpp
     ${CTL_DIR}/mat/matrix.tpp)
 	
 set (CTL_SOURCES ${CTL_SOURCES}
@@ -87,7 +90,8 @@ set (CTL_SOURCES ${CTL_SOURCES}
     ${CTL_DIR}/projectors/raycasteradapter.cpp
     ${CTL_DIR}/projectors/raycasterprojector.cpp
     ${CTL_DIR}/processing/volumeresampler.cpp
-    ${CTL_DIR}/processing/volumeslicer.cpp)
+    ${CTL_DIR}/processing/volumeslicer.cpp
+    ${CTL_DIR}/projectors/standardpipeline.cpp)
 	
 set (CTL_SOURCES ${CTL_SOURCES}
 	${CTL_DIR}/ocl/clfileloader.cpp
@@ -108,7 +112,6 @@ set (PYCTL_SOURCES
     pysrc/acquisition/trajectories.cpp
     pysrc/acquisition/abstractpreparestep.cpp
     pysrc/projectors/abstractprojector.cpp
-    pysrc/projectors/abstractprojectorconfig.cpp
     pysrc/projectors/raycasterprojector.cpp
     pysrc/img/chunk2d.cpp
     pysrc/img/singleviewdata.cpp

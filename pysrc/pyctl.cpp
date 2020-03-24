@@ -17,11 +17,9 @@ void init_voxelvolume(py::module&);
 void init_spectralvolumedata(py::module&);
 
 void init_abstractprojector(py::module&);
-void init_abstractprojectorconfig(py::module&);
 
 PYBIND11_MODULE(_ctl, m) {
     init_abstractprojector(m);
-    init_abstractprojectorconfig(m);
     init_ocl(m.def_submodule("ocl"));
 
     init_acquisitionsetup(m);
