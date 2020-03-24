@@ -30,7 +30,8 @@ The following installation guide has been tested on Windows 10 with MSVC 2019, C
 
 # Installation on Linux (not tested)
 * Install build tools: `sudo apt install build-essential`
-* Install CMake: `sudo apt install cmake`. Clone this repository.
+* Install CMake: `sudo apt install cmake`.
+* Install Git: `sudo apt-get install git`. Clone this repository.
 * Install Qt: `sudo apt install qt5-default`
 * Install OpenCL 1.1/1.2:
     * Install official NVIDIA driver using Driver Manager --> reboot
