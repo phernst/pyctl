@@ -109,15 +109,33 @@ set (PYCTL_SOURCES
     pysrc/acquisition/acquisitionsetup.cpp
     pysrc/acquisition/ctsystem.cpp
     pysrc/acquisition/ctsystembuilder.cpp
+    pysrc/acquisition/simplectsystem.cpp
+    pysrc/acquisition/systemblueprints.cpp
     pysrc/acquisition/trajectories.cpp
     pysrc/acquisition/abstractpreparestep.cpp
+    pysrc/components/systemcomponent.cpp
+    pysrc/components/abstractdetector.cpp
+    pysrc/components/abstractsource.cpp
+    pysrc/components/xraytube.cpp
     pysrc/projectors/abstractprojector.cpp
     pysrc/projectors/raycasterprojector.cpp
+    pysrc/projectors/projectorextension.cpp
+    pysrc/projectors/arealfocalspotextension.cpp
+    pysrc/projectors/detectorsaturationextension.cpp
+    pysrc/projectors/dynamicprojectorextension.cpp
+    pysrc/projectors/poissonnoiseextension.cpp
+    pysrc/projectors/spectraleffectsextension.cpp
+    pysrc/projectors/projectionpipeline.cpp
+    pysrc/projectors/standardpipeline.cpp
     pysrc/img/chunk2d.cpp
+    pysrc/img/compositevolume.cpp
     pysrc/img/singleviewdata.cpp
     pysrc/img/projectiondata.cpp
     pysrc/img/voxelvolume.cpp
-    pysrc/img/spectralvolumedata.cpp)
+    pysrc/img/spectralvolumedata.cpp
+    pysrc/io/ctldatabase.cpp
+    pysrc/models/abstractdatamodel.cpp
+    pysrc/models/detectorsaturationmodels.cpp)
 
 pybind11_add_module(_ctl MODULE ${PYCTL_SOURCES} ${CTL_SOURCES} ${MOC_FILES})
 target_include_directories(_ctl PRIVATE ${CMAKE_CURRENT_SOURCE_DIR} ${CTL_DIR})

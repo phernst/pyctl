@@ -35,7 +35,7 @@ void init_singleviewdata(py::module& m)
         .def("nb_modules", &SingleViewData::nbModules)
         .def("total_pixel_count", &SingleViewData::totalPixelCount)
         .def("append", static_cast<void(SingleViewData::*)(const Chunk2D<float>&)>
-            (&SingleViewData::append), "module_data"_a)
+            (&SingleViewData::append), "module_data"_a, py::keep_alive<1,2>())
         .def("fill", &SingleViewData::fill, "fill_value"_a)
         .def("max", &SingleViewData::max)
         .def("min", &SingleViewData::min)

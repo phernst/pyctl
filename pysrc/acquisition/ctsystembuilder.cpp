@@ -13,19 +13,14 @@ static CTL::CTsystem create_from_json_file(const std::string& file_name)
 void init_ctsystembuilder(py::module& m)
 {
     using namespace CTL;
+    using rvp = py::return_value_policy;
+    
     py::class_<CTsystemBuilder>(m, "CTsystemBuilder")
         .def_static("create_from_blueprint", &CTsystemBuilder::createFromBlueprint)
         .def_static("create_from_json_file", &create_from_json_file);
 
     py::class_<AbstractCTsystemBlueprint>(m, "AbstractCTsystemBlueprint")
-        .def("detector", &AbstractCTsystemBlueprint::detector)
-        .def("gantry", &AbstractCTsystemBlueprint::gantry)
-        .def("source", &AbstractCTsystemBlueprint::source);
-
-    
-    auto bp { m.def_submodule("blueprints") };
-    py::class_<blueprints::GenericTubularCT, AbstractCTsystemBlueprint>(bp, "GenericTubularCT")
-        .def(py::init<>());
-    py::class_<blueprints::GenericCarmCT, AbstractCTsystemBlueprint>(bp, "GenericCarmCT")
-        .def(py::init<>());
+        .def("detector", &AbstractCTsystemBlueprint::detector, rvp::reference)
+        .def("gantry", &AbstractCTsystemBlueprint::gantry, rvp::reference)
+        .def("source", &AbstractCTsystemBlueprint::source, rvp::reference);
 }

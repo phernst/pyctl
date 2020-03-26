@@ -66,5 +66,13 @@ void init_voxelvolume(py::module& m)
                 size[1].cast<float>(),
                 size[2].cast<float>());
         }, "size"_a)
-        .def("fill", &VoxelVolumeF::fill, "fill_value"_a);
+        .def("fill", &VoxelVolumeF::fill, "fill_value"_a)
+        .def_static("ball", &VoxelVolumeF::ball, "radius"_a, "voxel_size"_a, "fill_value"_a)
+        .def_static("cube", &VoxelVolumeF::cube, "nb_voxel"_a, "voxel_size"_a, "fill_value"_a)
+        .def_static("cylinder_x", &VoxelVolumeF::cylinderX, "radius"_a, "height"_a, "voxel_size"_a,
+            "fill_value"_a)
+        .def_static("cylinder_y", &VoxelVolumeF::cylinderY, "radius"_a, "height"_a, "voxel_size"_a,
+            "fill_value"_a)
+        .def_static("cylinder_z", &VoxelVolumeF::cylinderZ, "radius"_a, "height"_a, "voxel_size"_a,
+            "fill_value"_a);
 }
