@@ -39,20 +39,16 @@ set (CTL_SOURCES
     ${CTL_DIR}/components/tubulargantry.cpp
     ${CTL_DIR}/components/xraylaser.cpp
     ${CTL_DIR}/components/xraytube.cpp
-    ${CTL_DIR}/img/chunk2d.tpp
     ${CTL_DIR}/img/compositevolume.cpp
     ${CTL_DIR}/img/projectiondata.cpp
     ${CTL_DIR}/img/singleviewdata.cpp
     ${CTL_DIR}/img/spectralvolumedata.cpp
-    ${CTL_DIR}/img/voxelvolume.tpp
-    ${CTL_DIR}/io/basetypeio.tpp
     ${CTL_DIR}/io/jsonserializer.cpp
     ${CTL_DIR}/io/serializationhelper.cpp
     ${CTL_DIR}/io/binaryserializer.cpp
     ${CTL_DIR}/io/ctldatabase.cpp
     ${CTL_DIR}/io/messagehandler.cpp
     ${CTL_DIR}/mat/homography.cpp
-    ${CTL_DIR}/mat/matrix_utils.tpp
     ${CTL_DIR}/mat/matrix_algorithm.cpp
     ${CTL_DIR}/mat/pmatcomparator.cpp
     ${CTL_DIR}/mat/projectionmatrix.cpp
@@ -78,8 +74,7 @@ set (CTL_SOURCES
     ${CTL_DIR}/projectors/projectionpipeline.cpp
     ${CTL_DIR}/projectors/projectorextension.cpp
     ${CTL_DIR}/projectors/dynamicprojectorextension.cpp
-    ${CTL_DIR}/img/lineardynamicvolume.cpp
-    ${CTL_DIR}/mat/matrix.tpp)
+    ${CTL_DIR}/img/lineardynamicvolume.cpp)
 	
 set (CTL_SOURCES ${CTL_SOURCES}
     ${CTL_DIR}/processing/consistency.cpp

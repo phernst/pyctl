@@ -24,7 +24,7 @@ void init_standardpipeline(py::module& m)
         .def("is_linear", &StandardPipeline::isLinear)
         .def("enable_areal_focal_spot", &StandardPipeline::enableArealFocalSpot, "enable"_a = true)
         .def("enable_detector_saturation", &StandardPipeline::enableDetectorSaturation, "enable"_a = true)
-        .def("enable_poisson_nois", &StandardPipeline::enablePoissonNoise, "enable"_a = true)
+        .def("enable_poisson_noise", &StandardPipeline::enablePoissonNoise, "enable"_a = true)
         .def("enable_spectral_effects", &StandardPipeline::enableSpectralEffects, "enable"_a = true);
 
     ap.value("No_Approximation", StandardPipeline::No_Approximation)
