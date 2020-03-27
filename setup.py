@@ -8,6 +8,8 @@ import sys
 from setuptools import setup, Extension, find_packages
 from setuptools.command.build_ext import build_ext
 
+from create_cmakelists import create_cmakelists
+
 
 class CMakeExtension(Extension):
     def __init__(self, name, sourcedir=''):
@@ -17,6 +19,8 @@ class CMakeExtension(Extension):
 
 class CMakeBuild(build_ext):
     def run(self):
+        create_cmakelists('ctl_src')
+
         try:
             out = subprocess.check_output(['cmake', '--version'])
         except OSError:
