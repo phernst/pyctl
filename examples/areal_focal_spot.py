@@ -1,6 +1,5 @@
 import ctl
 from matplotlib import pyplot as plt
-import numpy as np
 
 def main():
     # define volume and acquisition setup (incl. system)
@@ -31,10 +30,8 @@ def main():
     projections = extension.project(volume)     # (compute and) get the final projections
 
     # show projection #0
-    proj = projections.view(0).module(0)
-    proj_dims = tuple(reversed(proj.dimensions()))
-    projection_np = np.array(proj.data(), dtype=np.float).reshape(proj_dims)
-    _ = plt.imshow(projection_np, cmap='gray'), plt.show()
+    proj = projections.view(0).module(0).to_numpy()
+    _ = plt.imshow(proj, cmap='gray'), plt.show()
 
 if __name__ == '__main__':
     main()

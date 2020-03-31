@@ -1,5 +1,6 @@
 #include <pybind11/pybind11.h>
 #include <pybind11/stl.h>
+#include <pybind11/numpy.h>
 #include <img/projectiondata.h>
 
 namespace py = pybind11;
@@ -47,5 +48,19 @@ void init_projectiondata(py::module& m)
         .def("transform_to_intensity", static_cast<void(ProjectionData::*)(double)>
             (&ProjectionData::transformToIntensity), "i0"_a = 1.0)
         .def("transform_to_counts", static_cast<void(ProjectionData::*)(double)>
-            (&ProjectionData::transformToCounts), "N0"_a = 1.0);
+            (&ProjectionData::transformToCounts), "N0"_a = 1.0)
+        .def("to_numpy", [](const ProjectionData& self) -> py::array_t<float>
+        {
+            const auto& dims { self.dimensions() };
+            const auto stride_views { sizeof(float)*dims.nbModules*dims.nbRows*dims.nbChannels };
+            const auto stride_modules { sizeof(float)*dims.nbRows*dims.nbChannels };
+            const auto stride_rows { sizeof(float)*dims.nbChannels };
+            const auto stride_cols { sizeof(float)*1u };
+            const auto vec { self.toVector() };
+            return {
+                { dims.nbViews, dims.nbModules, dims.nbRows, dims.nbChannels },
+                { stride_views, stride_modules, stride_rows, stride_cols },
+                vec.data()
+            };
+        }, "Copies the internal data into a NumPy array of shape [views, modules, rows, channels]");
 }

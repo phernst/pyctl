@@ -1,6 +1,5 @@
 import ctl
 from matplotlib import pyplot as plt
-import numpy as np
 
 def main():
     # define volume as a ball filled with attenuation 0.081/mm (approx. bone @ 50 keV)
@@ -38,14 +37,10 @@ def main():
     projections = extension.project(volume)
 
     # plot differences
-    proj = projections.view(0).module(0)
-    proj_dims = tuple(reversed(proj.dimensions()))
-    projection_np = np.array(proj.data(), dtype=np.float).reshape(proj_dims)
-
-    spectral_proj = spectral_projections.view(0).module(0)
-    spectral_projection_np = np.array(spectral_proj.data(), dtype=np.float).reshape(proj_dims)
-    _ = plt.plot(projection_np[proj_dims[0]//2])
-    _ = plt.plot(spectral_projection_np[proj_dims[0]//2])
+    proj = projections.view(0).module(0).to_numpy()
+    spectral_proj = spectral_projections.view(0).module(0).to_numpy()
+    _ = plt.plot(proj[proj.shape[0]//2])
+    _ = plt.plot(spectral_proj[proj.shape[0]//2])
     plt.show()
 
 if __name__ == '__main__':

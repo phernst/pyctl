@@ -1,6 +1,5 @@
 import ctl
 from matplotlib import pyplot as plt
-import numpy as np
 
 def main():
     # create ball phantom made of cortical bone
@@ -28,10 +27,8 @@ def main():
     projections = pipe.project(volume)
 
     # show projection #1
-    proj = projections.view(1).module(0)
-    proj_dims = tuple(reversed(proj.dimensions()))
-    projection_np = np.array(proj.data(), dtype=np.float).reshape(proj_dims)
-    _ = plt.imshow(projection_np, cmap='gray'), plt.show()
+    proj = projections.view(1).module(0).to_numpy()
+    _ = plt.imshow(proj, cmap='gray'), plt.show()
 
 if __name__ == '__main__':
     main()

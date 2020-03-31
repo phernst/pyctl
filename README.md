@@ -62,6 +62,10 @@ def main():
     volume = ctl.VoxelVolumeF((128, 128, 128), (1.0, 1.0, 1.0))
     volume.fill(1.0)
 
+    # alternatively:
+    # volume = ctl.VoxelVolumeF.from_numpy(np.ones((128, 128, 128)))
+    # volume.set_voxel_size((1.0, 1.0, 1.0))
+
     # use of a predefined system from ctl.blueprints
     system = ctl.CTsystemBuilder.create_from_blueprint(ctl.blueprints.GenericCarmCT())
 
@@ -83,11 +87,10 @@ def main():
     my_projector.configure(my_carm_setup)            # configure the projector
     projections = my_projector.project(volume)       # project
 
-    # show the 20th projection
-    proj20 = projections.view(20).module(0)
-    proj_dims = tuple(reversed(proj20.dimensions()))
-    projection_np = np.array(proj20.data(), dtype=np.float).reshape(proj_dims)
-    _ = plt.imshow(projection_np, cmap='gray'), plt.show()
+    # show the 20th projection of detector module 0
+    proj20 = projections.to_numpy()[20, 0]
+    # alternatively: proj20 = projections.view(20).module(0).to_numpy()
+    _ = plt.imshow(proj20, cmap='gray'), plt.show()
 
 if __name__ == '__main__':
     main()
