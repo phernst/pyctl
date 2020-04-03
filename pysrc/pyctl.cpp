@@ -36,6 +36,8 @@ void init_spectraleffectsextension(py::module&);
 void init_projectionpipeline(py::module&);
 void init_standardpipeline(py::module&);
 
+void init_gui(py::module&);
+
 PYBIND11_MODULE(_ctl, m) {
     init_abstractprojector(m);
     init_ctldatabase(m);
@@ -69,4 +71,6 @@ PYBIND11_MODULE(_ctl, m) {
     init_projectiondata(m);
     init_voxelvolume(m);
     init_spectralvolumedata(m);
+
+    init_gui(m.def_submodule("gui"));
 }

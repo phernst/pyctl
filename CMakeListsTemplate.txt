@@ -12,7 +12,7 @@ if(CMAKE_VERSION VERSION_LESS "3.7.0")
     set(CMAKE_INCLUDE_CURRENT_DIR ON)
 endif()
 
-find_package(Qt5 COMPONENTS Core Widgets REQUIRED)
+find_package(Qt5 COMPONENTS Core Widgets Gui 3DCore 3DExtras 3DRender REQUIRED)
 find_package(OpenCL REQUIRED)
 
 set (CTL_DIR
@@ -22,15 +22,26 @@ $$insert_ctl_dir$$
 set (CTL_SOURCES
 $$insert_ctl_sources$$
 )
+
+set (CTL_FORMS
+$$insert_ctl_forms$$
+)
 	
 set (MOC_FILES ${CTL_DIR}/projectors/abstractprojector.h)
 	
-add_compile_definitions(_USE_MATH_DEFINES QT_NO_DEBUG_OUTPUT)
+add_compile_definitions(_USE_MATH_DEFINES QT_NO_DEBUG_OUTPUT GUI_WIDGETS_3D_MODULE_AVAILABLE)
 
 set (PYCTL_SOURCES
 $$insert_pyctl_sources$$
 )
 
-pybind11_add_module(_ctl MODULE ${PYCTL_SOURCES} ${CTL_SOURCES} ${MOC_FILES})
+pybind11_add_module(_ctl MODULE ${PYCTL_SOURCES} ${CTL_SOURCES} ${CTL_FORMS} ${MOC_FILES})
 target_include_directories(_ctl PRIVATE ${CMAKE_CURRENT_SOURCE_DIR} ${CTL_DIR})
-target_link_libraries(_ctl PRIVATE Qt5::Core Qt5::Widgets OpenCL::OpenCL)
+target_link_libraries(_ctl PRIVATE
+    Qt5::Core
+    Qt5::Widgets
+    Qt5::Gui
+    Qt5::3DCore
+    Qt5::3DExtras
+    Qt5::3DRender
+    OpenCL::OpenCL)

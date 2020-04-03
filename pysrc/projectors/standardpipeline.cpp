@@ -1,6 +1,7 @@
 #include <pybind11/pybind11.h>
 #include <projectors/standardpipeline.h>
 #include <acquisition/acquisitionsetup.h>
+#include <QSize>
 
 namespace py = pybind11;
 
