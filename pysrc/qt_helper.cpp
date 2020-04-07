@@ -1,7 +1,6 @@
 #include "qt_helper.h"
 #include <QApplication>
 #include <QWidget>
-#include <string>
 
 QCoreApplication* qAppInstance()
 {
