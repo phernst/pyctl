@@ -1,16 +1,18 @@
 #include "qt_helper.h"
 #include <QApplication>
 #include <QWidget>
+#include <string>
 
 QCoreApplication* qAppInstance()
 {
-    static constexpr const char* CTL_ARGV[] = { "ctl" };
-    static constexpr const int ONE { 1 };
+    static char CTL_ARG0[] { "ctl" };
+    static auto CTL_ARGV { CTL_ARG0 };
+    static auto ONE { 1 };
 
     auto qapp { QApplication::instance() };
     if (!qapp)
     {
-        qapp = new QApplication(const_cast<int&>(ONE), const_cast<char**>(CTL_ARGV));
+        qapp = new QApplication(ONE, &CTL_ARGV);
         QObject::connect(qapp, SIGNAL(lastWindowClosed()), qapp, SLOT(quit()));
     }
 
