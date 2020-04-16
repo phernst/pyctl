@@ -61,17 +61,27 @@ class CMakeBuild(build_ext):
         subprocess.check_call(['cmake', '--build', '.'] + build_args, cwd=self.build_temp)
 
 
+this_directory = os.path.abspath(os.path.dirname(__file__))
+with open(os.path.join(this_directory, 'README.md'), encoding='utf-8') as f:
+    long_description = f.read()
+
+
 setup(
     name='pyctl',
     version='0.0.1',
     author='Philipp Ernst',
     author_email='philipp.ernst@ovgu.de',
-    description='Python interface for CTL',
-    long_description='',
+    url='https://github.com/phernst/pyctl',
+    description='Python bindings for CTL',
+    long_description=long_description,
+    long_description_content_type='text/markdown',
     ext_modules=[CMakeExtension('pyctl')],
     cmdclass=dict(build_ext=CMakeBuild),
     packages=find_packages(),
     include_package_data=True,
     zip_safe=False,
-    install_requires=['importlib_resources;python_version<"3.7"'],
+    install_requires=[
+        'importlib_resources;python_version<"3.7"',
+        'PySide2>=5.12',
+    ],
 )

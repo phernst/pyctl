@@ -10,7 +10,32 @@ except ImportError:
     del files
 import atexit
 from contextlib import ExitStack
-import _ctl
+import ctypes
+from ctypes.util import find_library
+import sys
+
+def _raise_if_wrong_env_qt():
+    qt_lib_path = find_library('qt5core')
+    if qt_lib_path is None:
+        return
+    qt5core = ctypes.CDLL(qt_lib_path)
+    qtver = ctypes.c_char_p(qt5core.qVersion()).value.decode()
+    raise RuntimeError('Qt5 version must be at least 5.12 (is {})'.format(qtver))
+
+try:
+    import _ctl
+except ImportError:
+    _raise_if_wrong_env_qt()
+
+    from PySide2.QtWidgets import QApplication
+    QApplication(sys.argv)
+    del QApplication
+    import _ctl
+
+del _raise_if_wrong_env_qt
+del sys
+del find_library
+del ctypes
 
 _file_manager = ExitStack()
 atexit.register(_file_manager.close)
@@ -29,9 +54,12 @@ del db_source_dir
 
 __all__ = [name for name in dir(_ctl) if name[0] != '_' and name != 'gui']
 
-for name in dir(_ctl):
-    if name[0] == '_' or name == 'gui':
-        continue
-    globals()[name] = getattr(_ctl, name)
+def _add_ctl_attr():
+    for name in dir(_ctl):
+        if name[0] == '_' or name == 'gui':
+            continue
+        globals()[name] = getattr(_ctl, name)
+_add_ctl_attr()
+del _add_ctl_attr
 
 del _ctl

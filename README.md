@@ -10,9 +10,16 @@ Proc. SPIE 11072,
 110721L (28 May 2019);
 [doi:10.1117/12.2534517](https://doi.org/10.1117/12.2534517)
 
-The following installation guide has been tested on Windows 10 with MSVC 2019, CUDA 10.1, Python>=3.6.
+# Simple installation
+Install via pip:
+```
+pip install pyctl
+```
 
-# Installation on Windows
+# Compiling from sources
+The following compilation guide has been tested on Windows 10 with MSVC 2019, CUDA 10.1, Python>=3.6.
+
+## On Windows
 * Install [MS Visual Studio Build Tools](https://visualstudio.microsoft.com/downloads/) with Windows SDK.
 * Install [CMake](https://cmake.org/download/). Make sure the `PATH` environment variable is set accordingly.
 * Install [Git](https://git-scm.com/). Clone this repository.
@@ -28,16 +35,16 @@ The following installation guide has been tested on Windows 10 with MSVC 2019, C
 * Install Python 3 + pip. Recommended: use a virtual [conda environment](https://www.anaconda.com/).
 * `cd` into the cloned PyCTL directory and run `pip install .`
 
-# Installation on Linux (not tested)
+## On Linux (not tested)
 * Install build tools: `sudo apt install build-essential`
 * Install CMake: `sudo apt install cmake`.
-* Install Git: `sudo apt-get install git`. Clone this repository.
+* Install Git: `sudo apt install git`. Clone this repository.
 * Install Qt: `sudo apt install qt5-default`
 * Install OpenCL 1.1/1.2:
     * Install official NVIDIA driver using Driver Manager --> reboot
     * Install NVIDIA OpenCL development package: `sudo apt install nvidia-opencl-dev`
     * Install OpenCL headers: `sudo apt install opencl-headers`
-* Install Python 3: `sudo apt-get install python3`. Recommended: use a virtual environment.
+* Install Python 3: `sudo apt install python3`. Recommended: use a virtual environment.
 * `cd` into the cloned PyCTL directory and run `pip install .`
 
 # Teaser: Making projections
