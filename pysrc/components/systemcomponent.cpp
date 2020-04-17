@@ -8,6 +8,7 @@ void init_systemcomponent(py::module& m)
     using namespace CTL;
     using namespace py::literals;
 
+    // TODO - holder type necessary?
     py::class_<SystemComponent, std::shared_ptr<SystemComponent>>(m, "SystemComponent")
         .def(py::init<>())
         .def("elemental_type", &SystemComponent::elementalType)

@@ -2,10 +2,14 @@
 
 namespace py = pybind11;
 
+void init_mat(py::module&);
+
 void init_ocl(py::module&);
 void init_acquisitionsetup(py::module&);
 void init_systemcomponent(py::module&);
+void init_abstractbeammodifier(py::module&);
 void init_abstractdetector(py::module&);
+void init_abstractgantry(py::module&);
 void init_abstractsource(py::module&);
 void init_xraytube(py::module&);
 void init_ctsystem(py::module&);
@@ -37,6 +41,7 @@ void init_projectionpipeline(py::module&);
 void init_standardpipeline(py::module&);
 
 PYBIND11_MODULE(_ctl, m) {
+    init_mat(m.def_submodule("mat"));
     init_abstractprojector(m);
     init_ctldatabase(m);
     init_abstractdatamodel(m);
@@ -53,7 +58,9 @@ PYBIND11_MODULE(_ctl, m) {
 
     init_acquisitionsetup(m);
     init_systemcomponent(m);
+    init_abstractbeammodifier(m);
     init_abstractdetector(m);
+    init_abstractgantry(m);
     init_abstractsource(m);
     init_xraytube(m);
     init_ctsystem(m);
