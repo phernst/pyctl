@@ -3,6 +3,7 @@
 namespace py = pybind11;
 
 void init_mat(py::module&);
+void init_coordinates(py::module&);
 
 void init_ocl(py::module&);
 void init_acquisitionsetup(py::module&);
@@ -11,7 +12,17 @@ void init_abstractbeammodifier(py::module&);
 void init_abstractdetector(py::module&);
 void init_abstractgantry(py::module&);
 void init_abstractsource(py::module&);
+void init_attenuationfilter(py::module&);
+void init_carmgantry(py::module&);
+void init_cylindricaldetector(py::module&);
+void init_flatpaneldetector(py::module&);
+void init_genericbeammodifier(py::module&);
+void init_genericdetector(py::module&);
+void init_genericgantry(py::module&);
+void init_genericsource(py::module&);
+void init_tubulargantry(py::module&);
 void init_xraytube(py::module&);
+void init_xraylaser(py::module&);
 void init_ctsystem(py::module&);
 void init_simplectsystem(py::module&);
 void init_ctsystembuilder(py::module&);
@@ -42,6 +53,7 @@ void init_standardpipeline(py::module&);
 
 PYBIND11_MODULE(_ctl, m) {
     init_mat(m.def_submodule("mat"));
+    init_coordinates(m);
     init_abstractprojector(m);
     init_ctldatabase(m);
     init_abstractdatamodel(m);
@@ -62,7 +74,17 @@ PYBIND11_MODULE(_ctl, m) {
     init_abstractdetector(m);
     init_abstractgantry(m);
     init_abstractsource(m);
+    init_attenuationfilter(m);
+    init_carmgantry(m);
+    init_cylindricaldetector(m);
+    init_flatpaneldetector(m);
+    init_genericbeammodifier(m);
+    init_genericdetector(m);
+    init_genericgantry(m);
+    init_genericsource(m);
+    init_tubulargantry(m);
     init_xraytube(m);
+    init_xraylaser(m);
     init_ctsystem(m);
     init_simplectsystem(m);
     init_ctsystembuilder(m);

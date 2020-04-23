@@ -1,6 +1,7 @@
 #include <pybind11/pybind11.h>
 #include <pybind11/numpy.h>
 #include <mat/matrix.h>
+#include <sstream>
 
 namespace py = pybind11;
 
@@ -36,7 +37,30 @@ static py::class_<CTL::mat::Matrix<Rows,Cols>> createPyMatrix(py::module& m, con
             auto result { Mat_() };
             std::copy_n(static_cast<double*>(info.ptr), Rows*Cols, result.data());
             return result;
-        }), "init_array");
+        }), "init_array")
+        .def("__repr__", [](const Mat_& self)
+        {
+            auto repr { std::stringstream() };
+            const auto pre { std::string("Matrix([") };
+            repr << pre;
+            for (auto i {0u}; i < Rows - 1; i++)
+            {
+                repr << "[";
+                for (auto j {0u}; j < Cols - 1; j++)
+                {
+                    repr << self.at(i, j) << ", ";
+                }
+                repr << self.at(i, Cols - 1) << "],\n";
+                for (auto i {0u}; i < pre.length(); i++) repr << " ";
+            }
+            repr << "[";
+            for (auto j {0u}; j < Cols - 1; j++)
+            {
+                repr << self.at(Rows - 1, j) << ", ";
+            }
+            repr << self.at(Rows - 1, Cols - 1) << "]])";
+            return repr.str();
+        });
 }
 
 void init_matrix(py::module& m)
