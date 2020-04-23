@@ -7,6 +7,7 @@ void init_systemblueprints(py::module& m)
 {
     using namespace CTL;
     using namespace py::literals;
+    using rvp = py::return_value_policy;
 
     py::enum_<DetectorBinning>(m, "DetectorBinning")
         .value("Binning1x1", DetectorBinning::Binning1x1)
@@ -15,7 +16,21 @@ void init_systemblueprints(py::module& m)
 
     auto bp { m.def_submodule("blueprints") };
     py::class_<blueprints::GenericTubularCT, AbstractCTsystemBlueprint>(bp, "GenericTubularCT")
-        .def(py::init<>());
+        .def(py::init<>())
+        .def("detector", &blueprints::GenericTubularCT::detector, rvp::reference)
+        .def("gantry", &blueprints::GenericTubularCT::gantry, rvp::reference)
+        .def("source", &blueprints::GenericTubularCT::source, rvp::reference)
+        .def("system_name", [](const blueprints::GenericTubularCT& self)
+        {
+            return self.systemName().toStdString();
+        });
     py::class_<blueprints::GenericCarmCT, AbstractCTsystemBlueprint>(bp, "GenericCarmCT")
-        .def(py::init<DetectorBinning>(), "binning"_a = DetectorBinning::Binning1x1);
+        .def(py::init<DetectorBinning>(), "binning"_a = DetectorBinning::Binning2x2)
+        .def("detector", &blueprints::GenericCarmCT::detector, rvp::reference)
+        .def("gantry", &blueprints::GenericCarmCT::gantry, rvp::reference)
+        .def("source", &blueprints::GenericCarmCT::source, rvp::reference)
+        .def("system_name", [](const blueprints::GenericCarmCT& self)
+        {
+            return self.systemName().toStdString();
+        });
 }
