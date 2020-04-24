@@ -3,14 +3,13 @@
 
 namespace py = pybind11;
 
-void init_ctldatabase(py::module& m)
+void init_ctldatabase(py::module& m, py::module& db)
 {
     using namespace CTL;
     using namespace py::literals;
 
     {
         using namespace database;
-        auto db { m.def_submodule("database") };
         py::enum_<Element>(db, "Element")
             .value("H", Element::H)
             .value("He", Element::He)

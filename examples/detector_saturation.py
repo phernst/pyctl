@@ -4,7 +4,7 @@ from matplotlib import pyplot as plt
 def main():
     # define volume and acquisition setup (incl. system)
     volume = ctl.VoxelVolumeF.cube(100, 1.0, 0.02)
-    system = ctl.CTsystemBuilder.create_from_blueprint(
+    system = ctl.CTSystemBuilder.create_from_blueprint(
         ctl.blueprints.GenericCarmCT(ctl.DetectorBinning.Binning4x4))
 
     # set a detector saturation model (operating in extinction domain, clamps values to [0.1, 2.5])

@@ -5,7 +5,7 @@
 
 namespace py = pybind11;
 
-static void plot(CTL::SimpleCTsystem system, float visualScale)
+static void plot(CTL::SimpleCTSystem system, float visualScale)
 {
     auto viewer = new CTL::gui::CTSystemView(nullptr, visualScale);
     viewer->setAttribute(Qt::WA_DeleteOnClose);

@@ -22,7 +22,7 @@ def main():
     # In the projection code, we only change the setting for the
     # standard pipeline to 'No_Approximation'...
     setup = ctl.AcquisitionSetup(
-        ctl.CTsystemBuilder.create_from_blueprint(
+        ctl.CTSystemBuilder.create_from_blueprint(
             ctl.blueprints.GenericCarmCT(ctl.DetectorBinning.Binning4x4)),
         10)
     setup.apply_preparation_protocol(ctl.protocols.ShortScanTrajectory(750.0))

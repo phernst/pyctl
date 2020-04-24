@@ -9,6 +9,7 @@ void init_abstractdetector(py::module& m)
     using namespace py::literals;
     using rvp = py::return_value_policy;
 
+    // TODO - holder type necessary?
     auto ad = py::class_<AbstractDetector, SystemComponent, std::shared_ptr<AbstractDetector>>(m, "AbstractDetector")
         .def("info", [](const AbstractDetector* self)
         {
@@ -37,6 +38,7 @@ void init_abstractdetector(py::module& m)
             pypdim[1] = pdim.height();
             return pypdim;
         })
+        .def("module_location", &AbstractDetector::moduleLocation, "module"_a)
         .def("saturation_model", &AbstractDetector::saturationModel, rvp::reference)
         .def("spectral_response_model", &AbstractDetector::spectralResponseModel, rvp::reference)
         .def("saturation_model_type", &AbstractDetector::saturationModelType)
