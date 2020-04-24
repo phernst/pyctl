@@ -29,6 +29,8 @@ void init_ctsystembuilder(py::module&);
 void init_systemblueprints(py::module&);
 void init_trajectories(py::module&);
 void init_abstractpreparestep(py::module&);
+void init_preparesteps(py::module&);
+void init_preparationprotocols(py::module&);
 
 void init_ctldatabase(py::module&);
 void init_abstractdatamodel(py::module&);
@@ -52,6 +54,8 @@ void init_projectionpipeline(py::module&);
 void init_standardpipeline(py::module&);
 
 PYBIND11_MODULE(_ctl, m) {
+    auto protocols { m.def_submodule("protocols") };
+
     init_mat(m.def_submodule("mat"));
     init_coordinates(m);
     init_abstractprojector(m);
@@ -90,7 +94,9 @@ PYBIND11_MODULE(_ctl, m) {
     init_ctsystembuilder(m);
     init_systemblueprints(m);
     init_abstractpreparestep(m);
-    init_trajectories(m);
+    init_preparesteps(m);
+    init_preparationprotocols(protocols);
+    init_trajectories(protocols);
 
     init_chunk2d(m);
     init_compositevolume(m);
