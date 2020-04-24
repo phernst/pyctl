@@ -10,9 +10,16 @@ Proc. SPIE 11072,
 110721L (28 May 2019);
 [doi:10.1117/12.2534517](https://doi.org/10.1117/12.2534517)
 
-The following installation guide has been tested on Windows 10 with MSVC 2019, CUDA 10.1, Python>=3.6.
+# Simple installation
+Install via pip:
+```
+pip install pyctl
+```
 
-# Installation on Windows
+# Compiling from sources
+The following compilation guide has been tested on Windows 10 with MSVC 2019, CUDA 10.1, Python>=3.6.
+
+## On Windows
 * Install [MS Visual Studio Build Tools](https://visualstudio.microsoft.com/downloads/) with Windows SDK.
 * Install [CMake](https://cmake.org/download/). Make sure the `PATH` environment variable is set accordingly.
 * Install [Git](https://git-scm.com/). Clone this repository.
@@ -29,7 +36,7 @@ The following installation guide has been tested on Windows 10 with MSVC 2019, C
 * Install Python 3 + pip. Recommended: use a virtual [conda environment](https://www.anaconda.com/).
 * `cd` into the cloned PyCTL directory and run `pip install .`
 
-# Installation on Linux (not tested)
+## On Linux (not tested)
 * Install build tools: `sudo apt install build-essential`
 * Install CMake: `sudo apt install cmake`.
 * Install Git: `sudo apt install git`. Clone this repository.
