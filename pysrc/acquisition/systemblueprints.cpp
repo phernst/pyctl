@@ -3,7 +3,7 @@
 
 namespace py = pybind11;
 
-void init_systemblueprints(py::module& m)
+void init_systemblueprints(py::module& m, py::module& bp)
 {
     using namespace CTL;
     using namespace py::literals;
@@ -14,7 +14,6 @@ void init_systemblueprints(py::module& m)
         .value("Binning2x2", DetectorBinning::Binning2x2)
         .value("Binning4x4", DetectorBinning::Binning4x4);
 
-    auto bp { m.def_submodule("blueprints") };
     py::class_<blueprints::GenericTubularCT, AbstractCTsystemBlueprint>(bp, "GenericTubularCT")
         .def(py::init<>())
         .def("detector", &blueprints::GenericTubularCT::detector, rvp::reference)

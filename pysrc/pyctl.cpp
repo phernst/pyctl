@@ -26,13 +26,13 @@ void init_xraylaser(py::module&);
 void init_ctsystem(py::module&);
 void init_simplectsystem(py::module&);
 void init_ctsystembuilder(py::module&);
-void init_systemblueprints(py::module&);
+void init_systemblueprints(py::module&, py::module&);
 void init_trajectories(py::module&);
 void init_abstractpreparestep(py::module&);
 void init_preparesteps(py::module&);
 void init_preparationprotocols(py::module&);
 
-void init_ctldatabase(py::module&);
+void init_ctldatabase(py::module&, py::module&);
 void init_abstractdatamodel(py::module&);
 void init_detectorsaturationmodels(py::module&);
 
@@ -54,15 +54,20 @@ void init_projectionpipeline(py::module&);
 void init_standardpipeline(py::module&);
 
 PYBIND11_MODULE(_ctl, m) {
+    auto blueprints { m.def_submodule("blueprints") };
+    auto database { m.def_submodule("database") };
+    auto mat { m.def_submodule("mat") };
+    auto ocl { m.def_submodule("ocl") };
+    auto prepare { m.def_submodule("prepare") };
     auto protocols { m.def_submodule("protocols") };
 
-    init_mat(m.def_submodule("mat"));
+    init_mat(mat);
     init_coordinates(m);
     init_abstractprojector(m);
-    init_ctldatabase(m);
+    init_ctldatabase(m, database);
     init_abstractdatamodel(m);
     init_detectorsaturationmodels(m);
-    init_ocl(m.def_submodule("ocl"));
+    init_ocl(ocl);
     init_projectorextension(m);
     init_arealfocalspotextension(m);
     init_detectorsaturationextension(m);
@@ -92,9 +97,9 @@ PYBIND11_MODULE(_ctl, m) {
     init_ctsystem(m);
     init_simplectsystem(m);
     init_ctsystembuilder(m);
-    init_systemblueprints(m);
+    init_systemblueprints(m, blueprints);
     init_abstractpreparestep(m);
-    init_preparesteps(m);
+    init_preparesteps(prepare);
     init_preparationprotocols(protocols);
     init_trajectories(protocols);
 
