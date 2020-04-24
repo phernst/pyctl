@@ -7,7 +7,7 @@ def main():
         ctl.database.Composite.Bone_Cortical))
 
     # create a C-arm CT system and a short scan protocol with 10 views
-    system = ctl.CTsystemBuilder.create_from_blueprint(ctl.blueprints.GenericCarmCT())
+    system = ctl.CTSystemBuilder.create_from_blueprint(ctl.blueprints.GenericCarmCT())
     setup = ctl.AcquisitionSetup(system, 10)
     setup.apply_preparation_protocol(ctl.protocols.ShortScanTrajectory(750.0))
 

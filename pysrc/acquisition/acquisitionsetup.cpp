@@ -15,19 +15,20 @@ void init_acquisitionsetup(py::module& m)
 
     using AcView = AcquisitionSetup::View;
     as.def(py::init<>())
-        .def(py::init<const CTsystem&, uint>(), "system"_a, "nb_views"_a)
+        .def(py::init<const CTSystem&, uint>(), "system"_a, "nb_views"_a)
         .def(py::init<const AcquisitionSetup&>(), "other"_a)
         .def("add_view", &AcquisitionSetup::addView, "view"_a)
         .def("apply_preparation_protocol", &AcquisitionSetup::applyPreparationProtocol)
-        .def("clear_views", &AcquisitionSetup::clearViews, "keep_time_stamps"_a = false)
         .def("is_valid", &AcquisitionSetup::isValid)
         .def("nb_views", &AcquisitionSetup::nbViews)
         .def("prepare_view", &AcquisitionSetup::prepareView, "view_nb"_a)
-        .def("remove_all_prepare_steps", &AcquisitionSetup::removeAllPrepareSteps)
-        .def("reset_system", static_cast<bool(AcquisitionSetup::*)(const CTsystem&)>
+        .def("remove_all_prepare_steps", &AcquisitionSetup::removeAllPrepareSteps,
+            "keep_time_stamps"_a = false)
+        .def("remove_all_views", &AcquisitionSetup::removeAllViews)
+        .def("reset_system", static_cast<bool(AcquisitionSetup::*)(const CTSystem&)>
             (&AcquisitionSetup::resetSystem), "system")
         .def("set_nb_views", &AcquisitionSetup::setNbViews, "nb_views"_a)
-        .def("system", static_cast<SimpleCTsystem*(AcquisitionSetup::*)()>(&AcquisitionSetup::system),
+        .def("system", static_cast<SimpleCTSystem*(AcquisitionSetup::*)()>(&AcquisitionSetup::system),
             rvp::reference_internal)
         .def("view", static_cast<AcView&(AcquisitionSetup::*)(uint)>
             (&AcquisitionSetup::view), "view_nb"_a, rvp::reference_internal)
@@ -37,7 +38,9 @@ void init_acquisitionsetup(py::module& m)
     using PrepStep = AcquisitionSetup::PrepareStep;
     v.def(py::init<>())
         .def(py::init<double>(), "time")
-        .def("set_time_stamp", &AcView::setTimeStamp)
+        .def("set_time_stamp", &AcView::setTimeStamp, "time_stamp"_a)
+        .def("time_stamp", &AcView::timeStamp)
+        .def("add_prepare_step", &AcView::addPrepareStep, "step"_a)
         .def("clear_prepare_steps", &AcView::clearPrepareSteps)
         .def("nb_prepare_steps", &AcView::nbPrepareSteps)
         .def("prepare_steps", &AcView::prepareSteps, rvp::reference_internal)

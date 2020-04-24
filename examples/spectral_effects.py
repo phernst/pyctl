@@ -10,7 +10,7 @@ def main():
     spectral_vol = ctl.SpectralVolumeData.from_mu_volume(volume, ctl.database.attenuation_model(
         ctl.database.Composite.Bone_Cortical))
 
-    system = ctl.CTsystemBuilder.create_from_blueprint(
+    system = ctl.CTSystemBuilder.create_from_blueprint(
         ctl.blueprints.GenericCarmCT(ctl.DetectorBinning.Binning4x4))
     acquisition_setup = ctl.AcquisitionSetup(system, 10)
     acquisition_setup.apply_preparation_protocol(ctl.protocols.ShortScanTrajectory(750.0))

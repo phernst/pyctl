@@ -20,7 +20,7 @@ def main():
     # First, we need to define an acquisition setup
     # (with a CT system and the number of views; 10 in this case))
     setup = ctl.AcquisitionSetup(
-        ctl.CTsystemBuilder.create_from_blueprint(
+        ctl.CTSystemBuilder.create_from_blueprint(
             ctl.blueprints.GenericCarmCT(ctl.DetectorBinning.Binning4x4)),
         10)
 

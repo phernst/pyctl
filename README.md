@@ -67,7 +67,7 @@ def main():
     # volume.set_voxel_size((1.0, 1.0, 1.0))
 
     # use of a predefined system from ctl.blueprints
-    system = ctl.CTsystemBuilder.create_from_blueprint(ctl.blueprints.GenericCarmCT())
+    system = ctl.CTSystemBuilder.create_from_blueprint(ctl.blueprints.GenericCarmCT())
 
     # create an acquisition setup
     nb_views = 100
