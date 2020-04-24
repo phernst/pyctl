@@ -12,7 +12,7 @@ if(CMAKE_VERSION VERSION_LESS "3.7.0")
     set(CMAKE_INCLUDE_CURRENT_DIR ON)
 endif()
 
-find_package(Qt5 COMPONENTS Core Widgets Gui 3DCore 3DExtras 3DRender REQUIRED)
+find_package(Qt5 COMPONENTS Core Widgets Gui 3DCore 3DExtras 3DRender Charts REQUIRED)
 find_package(OpenCL REQUIRED)
 
 set (CTL_DIR
@@ -49,4 +49,5 @@ target_link_libraries(_ctl PRIVATE
     Qt5::3DCore
     Qt5::3DExtras
     Qt5::3DRender
+    Qt5::Charts
     OpenCL::OpenCL)

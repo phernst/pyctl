@@ -8,6 +8,7 @@ void init_volumeviewer(py::module&);
 void init_intersectionplaneview(py::module&);
 void init_volumesliceviewer(py::module&);
 void init_ctsystemview(py::module&);
+void init_datamodelviewer(py::module&);
 void init_acquisitionsetupview(py::module&);
 void init_pipelinecomposer(py::module&);
 void init_chunk2dview(py::module&);
@@ -26,6 +27,7 @@ void init_gui(py::module& m)
     init_intersectionplaneview(m);
     init_volumesliceviewer(m);
     init_ctsystemview(m);
+    init_datamodelviewer(m);
     init_acquisitionsetupview(m);
     init_pipelinecomposer(m);
     init_chunk2dview(m);

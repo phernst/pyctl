@@ -16,10 +16,11 @@ The following installation guide has been tested on Windows 10 with MSVC 2019, C
 * Install [MS Visual Studio Build Tools](https://visualstudio.microsoft.com/downloads/) with Windows SDK.
 * Install [CMake](https://cmake.org/download/). Make sure the `PATH` environment variable is set accordingly.
 * Install [Git](https://git-scm.com/). Clone this repository.
-* Install [Qt](https://www.qt.io/) 5. During installation, you need to set at least:
+* Install [Qt](https://www.qt.io/)>=5.12. During installation, you need to set at least:
     * Prebuilt components for MSVC 64-bit. Make sure the `PATH` environment variable is set accordingly
       (e.g. `C:\Qt\5.14.1\msvc2017_64\bin`). Make sure the `CMAKE_PREFIX_PATH` environment variable
       is set accordingly (e.g. `C:\Qt\5.14.1\msvc2017_64\lib\cmake\Qt5`).
+    * Qt Charts
     * Sources
 * Install OpenCL 1.1/1.2:
     * Install latest NVIDIA driver.
@@ -31,13 +32,13 @@ The following installation guide has been tested on Windows 10 with MSVC 2019, C
 # Installation on Linux (not tested)
 * Install build tools: `sudo apt install build-essential`
 * Install CMake: `sudo apt install cmake`.
-* Install Git: `sudo apt-get install git`. Clone this repository.
-* Install Qt: `sudo apt install qt5-default`
+* Install Git: `sudo apt install git`. Clone this repository.
+* Install Qt: `sudo apt install qt5-default qt3d5-dev libqt5charts5-dev`
 * Install OpenCL 1.1/1.2:
     * Install official NVIDIA driver using Driver Manager --> reboot
     * Install NVIDIA OpenCL development package: `sudo apt install nvidia-opencl-dev`
     * Install OpenCL headers: `sudo apt install opencl-headers`
-* Install Python 3: `sudo apt-get install python3`. Recommended: use a virtual environment.
+* Install Python 3: `sudo apt install python3`. Recommended: use a virtual environment.
 * `cd` into the cloned PyCTL directory and run `pip install .`
 
 # Teaser: Making projections

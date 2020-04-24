@@ -32,6 +32,7 @@ def insert_ctl_sources(file_handle, ctl_dir):
         extract_sources_from_qmake(ctl_dir + '/modules/submodules/ocl_routines.pri') + \
         extract_sources_from_qmake(ctl_dir + '/modules/submodules/gui_widgets.pri') + \
         extract_sources_from_qmake(ctl_dir + '/modules/submodules/gui_widgets_3d.pri') + \
+        extract_sources_from_qmake(ctl_dir + '/modules/submodules/gui_widgets_charts.pri') + \
         extract_sources_from_qmake(ctl_dir + '/modules/submodules/gui_widgets_ocl.pri')
 
     cmake_cpp_files = [f.replace('$$PWD/../src', '${CTL_DIR}') for f in qt_cpp_files]
@@ -45,6 +46,7 @@ def insert_ctl_forms(file_handle, ctl_dir):
         extract_forms_from_qmake(ctl_dir + '/modules/submodules/ocl_routines.pri') + \
         extract_forms_from_qmake(ctl_dir + '/modules/submodules/gui_widgets.pri') + \
         extract_forms_from_qmake(ctl_dir + '/modules/submodules/gui_widgets_3d.pri') + \
+        extract_forms_from_qmake(ctl_dir + '/modules/submodules/gui_widgets_charts.pri') + \
         extract_forms_from_qmake(ctl_dir + '/modules/submodules/gui_widgets_ocl.pri')
 
     cmake_cpp_files = [f.replace('$$PWD/../src', '${CTL_DIR}') for f in qt_cpp_files]
