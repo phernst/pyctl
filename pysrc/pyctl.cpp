@@ -58,6 +58,7 @@ void init_gui(py::module&);
 PYBIND11_MODULE(_ctl, m) {
     auto blueprints { m.def_submodule("blueprints") };
     auto database { m.def_submodule("database") };
+    auto gui { m.def_submodule("gui") };
     auto mat { m.def_submodule("mat") };
     auto ocl { m.def_submodule("ocl") };
     auto prepare { m.def_submodule("prepare") };
@@ -112,5 +113,5 @@ PYBIND11_MODULE(_ctl, m) {
     init_voxelvolume(m);
     init_spectralvolumedata(m);
 
-    init_gui(m.def_submodule("gui"));
+    init_gui(gui);
 }
