@@ -12,6 +12,8 @@ if(CMAKE_VERSION VERSION_LESS "3.7.0")
     set(CMAKE_INCLUDE_CURRENT_DIR ON)
 endif()
 
+set (CMAKE_CXX_STANDARD 11)
+
 find_package(Qt5 COMPONENTS Core Widgets Gui 3DCore 3DExtras 3DRender Charts REQUIRED)
 find_package(OpenCL REQUIRED)
 
