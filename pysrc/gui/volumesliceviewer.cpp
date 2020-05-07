@@ -23,4 +23,6 @@ void init_volumesliceviewer(py::module& m)
     
     py::class_<gui::VolumeSliceViewer>(m, "VolumeSliceViewer")
         .def_static("plot", plot, "volume"_a);
+    
+    m.def("plot", plot, "volume"_a);
 }

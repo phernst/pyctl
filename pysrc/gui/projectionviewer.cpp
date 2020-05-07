@@ -22,4 +22,6 @@ void init_projectionviewer(py::module& m)
     
     py::class_<gui::ProjectionViewer>(m, "ProjectionViewer")
         .def_static("plot", plot, "projections"_a);
+    
+    m.def("plot", plot, "projections"_a);
 }

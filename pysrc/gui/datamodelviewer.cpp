@@ -26,4 +26,6 @@ void init_datamodelviewer(py::module& m)
     
     py::class_<gui::DataModelViewer>(m, "DataModelViewer")
         .def_static("plot", plot, "model"_a, "label_x"_a = "x", "label_y"_a = "y");
+    
+    m.def("plot", plot, "model"_a, "label_x"_a = "x", "label_y"_a = "y");
 }

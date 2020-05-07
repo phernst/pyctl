@@ -27,4 +27,6 @@ void init_intersectionplaneview(py::module& m)
     py::class_<gui::IntersectionPlaneView>(m, "IntersectionPlaneView")
         .def_static("plot", plot, "volume"_a, "azimuth"_a, "polar"_a, "distance"_a,
             "visual_scale"_a = 50.f);
+    
+    m.def("plot", plot, "volume"_a, "azimuth"_a, "polar"_a, "distance"_a, "visual_scale"_a = 50.f);
 }
