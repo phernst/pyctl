@@ -44,6 +44,7 @@ void init_voxelvolume(py::module&);
 void init_spectralvolumedata(py::module&);
 
 void init_abstractprojector(py::module&);
+void init_raycasterprojectorcpu(py::module&);
 void init_projectorextension(py::module&);
 void init_arealfocalspotextension(py::module&);
 void init_detectorsaturationextension(py::module&);
@@ -67,6 +68,7 @@ PYBIND11_MODULE(_ctl, m) {
     init_mat(mat);
     init_coordinates(m);
     init_abstractprojector(m);
+    init_raycasterprojectorcpu(m);
     init_ctldatabase(m, database);
     init_abstractdatamodel(m);
     init_detectorsaturationmodels(m);
