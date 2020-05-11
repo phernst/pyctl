@@ -35,7 +35,7 @@ def main():
     print(projections.min(), projections.max()) # output: 0.1 2.5
 
     # show projection #0
-    proj = projections.view(0).module(0).to_numpy()
+    proj = projections.view(0).module(0).numpy()
     _ = plt.imshow(proj, cmap='gray'), plt.show()
 
 if __name__ == '__main__':

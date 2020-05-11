@@ -21,7 +21,7 @@ def main():
     projections = pipe.project(volume)
 
     # show projection #1
-    proj = projections.view(1).module(0).to_numpy()
+    proj = projections.view(1).module(0).numpy()
     _ = plt.imshow(proj, cmap='gray'), plt.show()
 
 if __name__ == '__main__':

@@ -49,7 +49,7 @@ void init_projectiondata(py::module& m)
             (&ProjectionData::transformToIntensity), "i0"_a = 1.0)
         .def("transform_to_counts", static_cast<void(ProjectionData::*)(double)>
             (&ProjectionData::transformToCounts), "N0"_a = 1.0)
-        .def("to_numpy", [](const ProjectionData& self) -> py::array_t<float>
+        .def("numpy", [](const ProjectionData& self) -> py::array_t<float>
         {
             const auto& dims { self.dimensions() };
             const auto stride_views { sizeof(float)*dims.nbModules*dims.nbRows*dims.nbChannels };

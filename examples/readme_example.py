@@ -35,8 +35,8 @@ def main():
     projections = my_projector.project(volume)       # project
 
     # show the 20th projection of detector module 0
-    proj20 = projections.to_numpy()[20, 0]
-    # alternatively: proj20 = projections.view(20).module(0).to_numpy()
+    proj20 = projections.numpy()[20, 0]
+    # alternatively: proj20 = projections.view(20).module(0).numpy()
     _ = plt.imshow(proj20, cmap='gray'), plt.show()
 
 if __name__ == '__main__':

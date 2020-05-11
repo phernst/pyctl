@@ -31,7 +31,7 @@ static py::class_<CTL::Chunk2D<T>> createPyChunk2D(py::module& m, const char* na
         .def("height", &Chunk2D<T>::height)
         .def("width", &Chunk2D<T>::width)
         .def("fill", &Chunk2D<T>::fill, "fill_value"_a)
-        .def("to_numpy", [](const Chunk2D<T>& self) -> py::array_t<T>
+        .def("numpy", [](const Chunk2D<T>& self) -> py::array_t<T>
         {
             return {
                 { self.height(), self.width() },

@@ -37,8 +37,8 @@ def main():
     projections = extension.project(volume)
 
     # plot differences
-    proj = projections.view(0).module(0).to_numpy()
-    spectral_proj = spectral_projections.view(0).module(0).to_numpy()
+    proj = projections.view(0).module(0).numpy()
+    spectral_proj = spectral_projections.view(0).module(0).numpy()
     _ = plt.plot(proj[proj.shape[0]//2])
     _ = plt.plot(spectral_proj[proj.shape[0]//2])
     plt.show()

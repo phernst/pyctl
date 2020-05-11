@@ -33,7 +33,7 @@ def main():
     projections = extension.project(volume)     # (compute and) get the final projections
 
     # show projection #0
-    proj = projections.view(0).module(0).to_numpy()
+    proj = projections.view(0).module(0).numpy()
     _ = plt.imshow(proj, cmap='gray'), plt.show()
 
 if __name__ == '__main__':
