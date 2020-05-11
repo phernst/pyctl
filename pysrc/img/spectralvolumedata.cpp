@@ -31,9 +31,9 @@ void init_spectralvolumedata(py::module& m)
         .def("is_density_volume", &SpectralVolumeData::isDensityVolume)
         .def("is_mu_volume", &SpectralVolumeData::isMuVolume)
         .def("mass_attenuation_coeff", &SpectralVolumeData::massAttenuationCoeff, "at_energy"_a)
-        .def("material_name", [](const SpectralVolumeData* self)
+        .def("material_name", [](const SpectralVolumeData& self)
         {
-            return self->materialName().toStdString();
+            return self.materialName().toStdString();
         })
         .def("mean_mass_attenuation_coeff", &SpectralVolumeData::meanMassAttenuationCoeff,
             "center_energy"_a, "bin_width"_a)
@@ -64,5 +64,7 @@ void init_spectralvolumedata(py::module& m)
         .def_static("from_mu_volume", &SpectralVolumeData::fromMuVolume, "mu_values"_a,
             "absorption_model"_a, "reference_energy"_a = 50.0f)
         .def_static("from_hu_volume", &SpectralVolumeData::fromHUVolume, "hu_values"_a,
-            "absorption_model"_a, "reference_energy"_a = 50.0f);    
+            "absorption_model"_a, "reference_energy"_a = 50.0f);
+
+    py::implicitly_convertible<VoxelVolume<float>, SpectralVolumeData>();
 }
