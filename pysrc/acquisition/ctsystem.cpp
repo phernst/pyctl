@@ -38,7 +38,7 @@ void init_ctsystem(py::module& m)
             const auto& comps { self.components() };
             auto raw_comps { std::vector<SystemComponent*>(comps.size()) };
             std::transform(comps.cbegin(), comps.cend(),
-                raw_comps.begin(), [](const auto& comp) { return comp.get(); });
+                raw_comps.begin(), [](const CTsystem::ComponentPtr& comp) { return comp.get(); });
             return raw_comps;
         }, rvp::reference_internal)
         .def("name", [](const CTSystem& self)
