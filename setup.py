@@ -7,14 +7,24 @@ import sys
 
 from setuptools import setup, Extension, find_packages
 from setuptools.command.build_ext import build_ext
+from setuptools.command.build_py import build_py
 
 from create_cmakelists import create_cmakelists
 
-
-class CMakeExtension(Extension):
+class CMakeExtension(Extension): # pylint: disable=too-few-public-methods
     def __init__(self, name, sourcedir=''):
         Extension.__init__(self, name, sources=[])
         self.sourcedir = os.path.abspath(sourcedir)
+
+
+class CopyCtlData(build_py):
+    def run(self):
+        self.copy_ctl_data()
+        super().run()
+
+    def copy_ctl_data(self):
+        self.copy_tree('ctl_src/modules/src/ocl/cl_src', 'ctl/cl_src')
+        self.copy_tree('ctl_src/database', 'ctl/database')
 
 
 class CMakeBuild(build_ext):
@@ -65,10 +75,9 @@ this_directory = os.path.abspath(os.path.dirname(__file__))
 with open(os.path.join(this_directory, 'README.md'), encoding='utf-8') as f:
     long_description = f.read()
 
-
 setup(
     name='pyctl',
-    version='0.1.0',
+    version='0.1.1',
     author='Philipp Ernst',
     author_email='philipp.ernst@ovgu.de',
     url='https://github.com/phernst/pyctl',
@@ -76,12 +85,12 @@ setup(
     long_description=long_description,
     long_description_content_type='text/markdown',
     ext_modules=[CMakeExtension('pyctl')],
-    cmdclass=dict(build_ext=CMakeBuild),
+    cmdclass=dict(build_py=CopyCtlData, build_ext=CMakeBuild),
     packages=find_packages(),
     include_package_data=True,
     zip_safe=False,
     install_requires=[
         'importlib_resources;python_version<"3.7"',
-        'PySide2>=5.12',
+        'PySide2>=5.12,<5.15',
     ],
 )

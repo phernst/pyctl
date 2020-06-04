@@ -87,10 +87,9 @@ public:
     {
         _sp.settingsRayCaster().setRaySampling(sampling);
     }
-    // TODO - change argument name in v0.3.2
-    void setVolumeUpSampling(uint upsamplingFactor)
+    void setVolumeUpSampling(uint upSamplingFactor)
     {
-        _sp.settingsRayCaster().setVolumeUpSampling(upsamplingFactor);
+        _sp.settingsRayCaster().setVolumeUpSampling(upSamplingFactor);
     }
 
 private:
@@ -151,8 +150,7 @@ void init_standardpipeline(py::module& m)
             self.setRaysPerPixel({ disc[0].cast<int>(), disc[1].cast<int>() });
         }, "sampling"_a)
         .def("set_ray_sampling", &PyRC::setRaySampling, "sampling"_a)
-        // TODO - change argument name in v0.3.2
-        .def("set_volume_up_sampling", &PyRC::setVolumeUpSampling, "upsampling_factor"_a);
+        .def("set_volume_up_sampling", &PyRC::setVolumeUpSampling, "up_sampling_factor"_a);
 
     ap.value("No_Approximation", StandardPipeline::No_Approximation)
         .value("Default_Approximation", StandardPipeline::Default_Approximation)

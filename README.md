@@ -15,6 +15,8 @@ Install via pip:
 ```
 pip install pyctl
 ```
+Note: This package was compiled with Qt 5.12. If you have installed Qt<5.12 or >=5.15, please remove any reference
+to Qt directories from the `PATH` environment variable or compile and install the package from sources.
 
 # Compiling from sources
 The following compilation guide has been tested on Windows 10 with MSVC 2019, CUDA 10.1, Python>=3.6.
@@ -28,7 +30,6 @@ The following compilation guide has been tested on Windows 10 with MSVC 2019, CU
       (e.g. `C:\Qt\5.14.1\msvc2017_64\bin`). Make sure the `CMAKE_PREFIX_PATH` environment variable
       is set accordingly (e.g. `C:\Qt\5.14.1\msvc2017_64\lib\cmake\Qt5`).
     * Qt Charts
-    * Sources
 * Install OpenCL 1.1/1.2:
     * Install latest NVIDIA driver.
     * Install [CUDA](https://developer.nvidia.com/cuda-downloads). Make sure the `CUDA_PATH` and
@@ -91,13 +92,12 @@ def main():
         sys.exit(-1)
 
     # configure a projector and project volume
-    my_projector = ctl.ocl.RayCasterProjector()      # the projector (uses its default settings)
-    my_projector.configure(my_carm_setup)            # configure the projector
-    projections = my_projector.project(volume)       # project
+    my_projector = ctl.ocl.RayCasterProjector() # an ideal projector with default settings
+    projections = my_projector.configure_and_project(my_carm_setup, volume)
 
     # show the 20th projection of detector module 0
-    proj20 = projections.to_numpy()[20, 0]
-    # alternatively: proj20 = projections.view(20).module(0).to_numpy()
+    proj20 = projections.numpy()[20, 0]
+    # alternatively: proj20 = projections.view(20).module(0).numpy()
     _ = plt.imshow(proj20, cmap='gray'), plt.show()
 
 if __name__ == '__main__':

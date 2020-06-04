@@ -12,9 +12,9 @@ void init_arealfocalspotextension(py::module& m)
         .def(py::init<>())
         .def(py::init([](py::tuple discretization, bool lowExtAppr)
         {
-            return std::make_unique<ArealFocalSpotExtension>(
+            return std::unique_ptr<ArealFocalSpotExtension>(new ArealFocalSpotExtension(
                 QSize(discretization[0].cast<int>(), discretization[1].cast<int>()),
-                lowExtAppr);
+                lowExtAppr));
         }), "discretization"_a, "low_extinction_approximation"_a = false)
         .def("set_discretization", [](ArealFocalSpotExtension* self, py::tuple discr)
         {

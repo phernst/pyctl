@@ -35,8 +35,7 @@ def main(path_to_nrrd):
 
     # configure a projector and project volume
     projector = ctl.ocl.RayCasterProjector()      # the projector (uses its default settings)
-    projector.configure(setup)                    # configure the projector
-    projections = projector.project(volume)       # project
+    projections = projector.configure_and_project(setup, volume)
 
     # save to nrrd file (from detector module #0)
     nrrd.write('projections.nrrd', projections.numpy()[:, 0].transpose())

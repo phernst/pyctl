@@ -30,13 +30,12 @@ def main():
         sys.exit(-1)
 
     # configure a projector and project volume
-    my_projector = ctl.ocl.RayCasterProjector()      # the projector (uses its default settings)
-    my_projector.configure(my_carm_setup)            # configure the projector
-    projections = my_projector.project(volume)       # project
+    my_projector = ctl.ocl.RayCasterProjector() # an ideal projector with default settings
+    projections = my_projector.configure_and_project(my_carm_setup, volume)
 
     # show the 20th projection of detector module 0
-    proj20 = projections.to_numpy()[20, 0]
-    # alternatively: proj20 = projections.view(20).module(0).to_numpy()
+    proj20 = projections.numpy()[20, 0]
+    # alternatively: proj20 = projections.view(20).module(0).numpy()
     _ = plt.imshow(proj20, cmap='gray'), plt.show()
 
 if __name__ == '__main__':

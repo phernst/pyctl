@@ -26,4 +26,6 @@ void init_chunk2dview(py::module& m)
     
     py::class_<gui::Chunk2DView>(m, "Chunk2DView")
         .def_static("plot", plot, "data"_a, "windowing"_a = py::make_tuple(0.0, 0.0), "zoom"_a = 1.0);
+
+    m.def("plot", plot, "data"_a, "windowing"_a = py::make_tuple(0.0, 0.0), "zoom"_a = 1.0);
 }

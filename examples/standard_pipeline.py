@@ -17,11 +17,10 @@ def main():
     pipe.settings_spectral_effects().set_sampling_resolution(5.0)
 
     # pass the acquisition setup and run the simulation
-    pipe.configure(setup)
-    projections = pipe.project(volume)
+    projections = pipe.configure_and_project(setup, volume)
 
     # show projection #1
-    proj = projections.view(1).module(0).to_numpy()
+    proj = projections.view(1).module(0).numpy()
     _ = plt.imshow(proj, cmap='gray'), plt.show()
 
 if __name__ == '__main__':

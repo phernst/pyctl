@@ -75,7 +75,7 @@ static py::class_<CTL::VoxelVolume<T>> createPyVoxelVolume(py::module& m, const 
             "fill_value"_a)
         .def_static("cylinder_z", &VoxelVolume<T>::cylinderZ, "radius"_a, "height"_a, "voxel_size"_a,
             "fill_value"_a)
-        .def("to_numpy", [](const VoxelVolume<T>& self) -> py::array_t<T>
+        .def("numpy", [](const VoxelVolume<T>& self) -> py::array_t<T>
         {
             const auto& dims { self.dimensions() };
             return {

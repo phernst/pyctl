@@ -21,4 +21,6 @@ void init_ctsystemview(py::module& m)
     
     py::class_<gui::CTSystemView>(m, "CTSystemView")
         .def_static("plot", plot, "system"_a, "visual_scale"_a = 50.f);
+    
+    m.def("plot", plot, "system"_a, "visual_scale"_a = 50.f);
 }

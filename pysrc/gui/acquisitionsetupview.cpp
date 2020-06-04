@@ -28,4 +28,7 @@ void init_acquisitionsetupview(py::module& m)
     py::class_<gui::AcquisitionSetupView>(m, "AcquisitionSetupView")
         .def_static("plot", plot, "setup"_a, "max_nb_views"_a = 100, "source_only"_a = false,
             "visual_scale"_a = 50.f);
+
+    m.def("plot", plot, "setup"_a, "max_nb_views"_a = 100, "source_only"_a = false,
+        "visual_scale"_a = 50.0f);
 }

@@ -13,7 +13,7 @@ void init_compositevolume(py::module& m)
         .def(py::init<SpectralVolumeData>(), "volume"_a)
         .def(py::init([](const VoxelVolume<float>& vol)
         {
-            return std::make_unique<CompositeVolume>(vol);
+            return std::unique_ptr<CompositeVolume>(new CompositeVolume(vol));
         }), "volume"_a)
         .def("is_empty", &CompositeVolume::isEmpty)
         .def("mu_volume", &CompositeVolume::muVolume, "vol_idx"_a, "center_energy"_a, "bin_width"_a)

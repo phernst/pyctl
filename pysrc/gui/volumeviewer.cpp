@@ -32,4 +32,17 @@ void init_volumeviewer(py::module& m)
         {
             plot({ std::move(data) });
         }, "data"_a);
+    
+    m.def("plot", [](CTL::CompositeVolume data)
+        {
+            plot(std::move(data));
+        }, "data"_a)
+        .def("plot", [](SpectralVolumeData data)
+        {
+            plot(std::move(data));
+        }, "data"_a)
+        .def("plot", [](VoxelVolume<float> data)
+        {
+            plot({ std::move(data) });
+        }, "data"_a);
 }

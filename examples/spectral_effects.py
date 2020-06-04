@@ -21,8 +21,7 @@ def main():
     # e.g. simple_projector.settings().ray_sampling = 0.1
 
     # This is what we do without the extension:
-    # simple_projector.configure(acquisition_setup)
-    # projections = simple_projector.project(volume)
+    # projections = simple_projector.configure_and_project(acquisition_setup, volume)
     # print(projections.min(), projections.max()) # output: 0 2.79263
 
     # Instead we now do the following:
@@ -37,8 +36,8 @@ def main():
     projections = extension.project(volume)
 
     # plot differences
-    proj = projections.view(0).module(0).to_numpy()
-    spectral_proj = spectral_projections.view(0).module(0).to_numpy()
+    proj = projections.view(0).module(0).numpy()
+    spectral_proj = spectral_projections.view(0).module(0).numpy()
     _ = plt.plot(proj[proj.shape[0]//2])
     _ = plt.plot(spectral_proj[proj.shape[0]//2])
     plt.show()

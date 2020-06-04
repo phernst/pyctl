@@ -40,6 +40,7 @@ void init_projectiondata(py::module& m)
         .def("view_dimensions", &ProjectionData::viewDimensions)
         .def("append", static_cast<void(ProjectionData::*)(const SingleViewData&)>
             (&ProjectionData::append), "single_view"_a, py::keep_alive<1,2>())
+        .def("combined", &ProjectionData::combined, "layout"_a = ModuleLayout())
         .def("fill", &ProjectionData::fill, "fill_value"_a)
         .def("max", &ProjectionData::max)
         .def("min", &ProjectionData::min)
@@ -49,7 +50,7 @@ void init_projectiondata(py::module& m)
             (&ProjectionData::transformToIntensity), "i0"_a = 1.0)
         .def("transform_to_counts", static_cast<void(ProjectionData::*)(double)>
             (&ProjectionData::transformToCounts), "N0"_a = 1.0)
-        .def("to_numpy", [](const ProjectionData& self) -> py::array_t<float>
+        .def("numpy", [](const ProjectionData& self) -> py::array_t<float>
         {
             const auto& dims { self.dimensions() };
             const auto stride_views { sizeof(float)*dims.nbModules*dims.nbRows*dims.nbChannels };

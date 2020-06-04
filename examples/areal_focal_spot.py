@@ -25,12 +25,12 @@ def main():
 
     extension.use(simple_projector)             # tell the extension to use the ray caster
     extension.set_discretization((5, 5))        # set discretization grid to 5x5 points
-    extension.configure(acquisition_setup)      # configure the simulation
 
-    projections = extension.project(volume)     # (compute and) get the final projections
+    # (configure, compute and) get the final projections
+    projections = extension.configure_and_project(acquisition_setup, volume)
 
     # show projection #0
-    proj = projections.view(0).module(0).to_numpy()
+    proj = projections.view(0).module(0).numpy()
     _ = plt.imshow(proj, cmap='gray'), plt.show()
 
 if __name__ == '__main__':

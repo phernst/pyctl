@@ -36,6 +36,10 @@ void init_singleviewdata(py::module& m)
         .def("total_pixel_count", &SingleViewData::totalPixelCount)
         .def("append", static_cast<void(SingleViewData::*)(const Chunk2D<float>&)>
             (&SingleViewData::append), "module_data"_a, py::keep_alive<1,2>())
+        .def("combined", [](const SingleViewData& self, const ModuleLayout& layout)
+        {
+            return self.combined(layout);
+        }, "layout"_a = ModuleLayout())
         .def("fill", &SingleViewData::fill, "fill_value"_a)
         .def("max", &SingleViewData::max)
         .def("min", &SingleViewData::min)
