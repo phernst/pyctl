@@ -12,10 +12,22 @@ void init_abstractprojector(py::module& m)
     py::class_<AbstractProjector>(m, "AbstractProjector")
         .def("configure", &AbstractProjector::configure, "setup"_a, py::keep_alive<1,2>())
         .def("project", &AbstractProjector::project, "volume"_a)
-        .def("project", [](AbstractProjector* p, const VoxelVolume<float>& volume)
+        .def("project", [](AbstractProjector& self, const VoxelVolume<float>& volume)
         {
-            return p->project(volume);
+            return self.project(volume);
         })
         .def("is_linear", &AbstractProjector::isLinear)
-        .def("project_composite", &AbstractProjector::projectComposite, "volume"_a);
+        .def("project_composite", &AbstractProjector::projectComposite, "volume"_a)
+        .def("configure_and_project", [](AbstractProjector& self,
+                                         const AcquisitionSetup& setup,
+                                         const VolumeData& volume)
+        {
+            return self.configureAndProject(setup, volume);
+        }, "setup"_a, "volume"_a)
+        .def("configure_and_project", [](AbstractProjector& self,
+                                         const AcquisitionSetup& setup,
+                                         const CompositeVolume& volume)
+        {
+            return self.configureAndProject(setup, volume);
+        }, "setup"_a, "volume"_a);
 }

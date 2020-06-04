@@ -20,17 +20,16 @@ def main():
     # e.g. simple_projector.settings().ray_sampling = 0.1
 
     # This is what we do without the extension:
-    # simple_projector.configure(acquisition_setup)
-    # projections = simple_projector.project(volume)
+    # projections = simple_projector.configure_and_project(acquisition_setup, volume)
     # print(projections.min(), projections.max()) # output: 0 2.79263
 
     # Instead we now do the following:
     extension = ctl.DetectorSaturationExtension()
 
     extension.use(simple_projector)             # tell the extension to use the ray caster
-    extension.configure(acquisition_setup)      # configure the simulation
 
-    projections = extension.project(volume)     # (compute and) get the final projections
+    # (configure, compute and) get the final projections
+    projections = extension.configure_and_project(acquisition_setup, volume)
 
     print(projections.min(), projections.max()) # output: 0.1 2.5
 

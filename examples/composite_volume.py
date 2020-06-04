@@ -31,8 +31,7 @@ def main():
     projector = ctl.StandardPipeline()
 
     # Pass the acquisition setup to the projector and create the projections:
-    projector.configure(setup)
-    projections = projector.project_composite(volume)
+    projections = projector.configure_and_project(setup, volume)
 
     # show projection #0
     proj = projections.view(0).module(0).numpy()

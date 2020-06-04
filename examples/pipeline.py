@@ -23,8 +23,7 @@ def main():
     pipe.append_extension(ctl.PoissonNoiseExtension())
 
     # pass the acquisition setup and run the simulation
-    pipe.configure(setup)
-    projections = pipe.project(volume)
+    projections = pipe.configure_and_project(setup, volume)
 
     # show projection #1
     proj = projections.view(1).module(0).numpy()

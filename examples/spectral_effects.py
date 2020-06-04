@@ -21,8 +21,7 @@ def main():
     # e.g. simple_projector.settings().ray_sampling = 0.1
 
     # This is what we do without the extension:
-    # simple_projector.configure(acquisition_setup)
-    # projections = simple_projector.project(volume)
+    # projections = simple_projector.configure_and_project(acquisition_setup, volume)
     # print(projections.min(), projections.max()) # output: 0 2.79263
 
     # Instead we now do the following:
