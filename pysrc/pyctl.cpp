@@ -36,6 +36,7 @@ void init_ctldatabase(py::module&, py::module&);
 void init_abstractdatamodel(py::module&);
 void init_detectorsaturationmodels(py::module&);
 
+void init_modulelayout(py::module&);
 void init_chunk2d(py::module&);
 void init_compositevolume(py::module&);
 void init_singleviewdata(py::module&);
@@ -108,6 +109,7 @@ PYBIND11_MODULE(_ctl, m) {
     init_preparationprotocols(protocols);
     init_trajectories(protocols);
 
+    init_modulelayout(m);
     init_chunk2d(m);
     init_compositevolume(m);
     init_singleviewdata(m);
