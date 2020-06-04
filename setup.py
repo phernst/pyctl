@@ -2,7 +2,6 @@ from distutils.version import LooseVersion
 import os
 import platform
 import re
-import shutil
 import subprocess
 import sys
 
@@ -20,13 +19,12 @@ class CMakeExtension(Extension): # pylint: disable=too-few-public-methods
 
 class CopyCtlData(build_py):
     def run(self):
-        CopyCtlData.copy_ctl_data()
+        self.copy_ctl_data()
         super().run()
 
-    @staticmethod
-    def copy_ctl_data():
-        shutil.copytree('ctl_src/modules/src/ocl/cl_src', 'ctl/cl_src', dirs_exist_ok=True)
-        shutil.copytree('ctl_src/database', 'ctl/database', dirs_exist_ok=True)
+    def copy_ctl_data(self):
+        self.copy_tree('ctl_src/modules/src/ocl/cl_src', 'ctl/cl_src')
+        self.copy_tree('ctl_src/database', 'ctl/database')
 
 
 class CMakeBuild(build_ext):
@@ -93,6 +91,6 @@ setup(
     zip_safe=False,
     install_requires=[
         'importlib_resources;python_version<"3.7"',
-        'PySide2>=5.12',
+        'PySide2>=5.12,<5.15',
     ],
 )
