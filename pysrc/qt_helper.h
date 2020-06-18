@@ -27,3 +27,7 @@ private:
 
     std::vector<QWidget*> _figures;
 };
+
+// TODO - find some way to determine which Qt version this was compiled with
+//        to be able to show a correct error message when importing the package
+//        with an unsupported version
