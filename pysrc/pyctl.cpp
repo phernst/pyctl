@@ -20,6 +20,9 @@ void init_genericbeammodifier(py::module&);
 void init_genericdetector(py::module&);
 void init_genericgantry(py::module&);
 void init_genericsource(py::module&);
+void init_geometrydecoder(py::module&);
+void init_geometryencoder(py::module&);
+void init_viewgeometry(py::module&);
 void init_tubulargantry(py::module&);
 void init_xraytube(py::module&);
 void init_xraylaser(py::module&);
@@ -116,6 +119,9 @@ PYBIND11_MODULE(_ctl, m) {
     init_projectiondata(m);
     init_voxelvolume(m);
     init_spectralvolumedata(m);
+    init_viewgeometry(m);
+    init_geometrydecoder(m);
+    init_geometryencoder(m);
 
     init_gui(gui);
 }
