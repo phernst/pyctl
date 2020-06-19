@@ -21,6 +21,7 @@ public:
     void addFigure(QWidget* figure);
     void showAllAndClear();
     void clear();
+    bool empty() const noexcept { return _figures.empty(); }
 
 private:
     FigureManager() = default;
