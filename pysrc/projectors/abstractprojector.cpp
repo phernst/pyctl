@@ -1,6 +1,7 @@
 #include <pybind11/pybind11.h>
 #include <projectors/abstractprojector.h>
 #include <acquisition/acquisitionsetup.h>
+#include "pysrc/pysharedptr.h"
 
 namespace py = pybind11;
 
@@ -9,7 +10,7 @@ void init_abstractprojector(py::module& m)
     using namespace CTL;
     using namespace py::literals;
 
-    py::class_<AbstractProjector>(m, "AbstractProjector")
+    py::class_<AbstractProjector, PySharedPtr<AbstractProjector>>(m, "AbstractProjector")
         .def("configure", &AbstractProjector::configure, "setup"_a, py::keep_alive<1,2>())
         .def("project", &AbstractProjector::project, "volume"_a)
         .def("project", [](AbstractProjector& self, const VoxelVolume<float>& volume)

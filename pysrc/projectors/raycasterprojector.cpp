@@ -1,6 +1,7 @@
 #include <pybind11/pybind11.h>
 #include <projectors/raycasterprojector.h>
 #include <components/abstractdetector.h>
+#include "../pysharedptr.h"
 
 namespace py = pybind11;
 
@@ -9,7 +10,7 @@ void init_raycasterprojector(py::module& m)
     using namespace CTL;
     using namespace py::literals;
 
-    auto rcp = py::class_<OCL::RayCasterProjector, AbstractProjector>(m, "RayCasterProjector")
+    auto rcp = py::class_<OCL::RayCasterProjector, AbstractProjector, PySharedPtr<OCL::RayCasterProjector>>(m, "RayCasterProjector")
         .def(py::init<>())
         .def("configure", &OCL::RayCasterProjector::configure, "setup"_a, py::keep_alive<1,2>())
         .def("project", &OCL::RayCasterProjector::project, "volume"_a)

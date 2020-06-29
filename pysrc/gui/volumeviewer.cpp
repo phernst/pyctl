@@ -26,11 +26,11 @@ void init_volumeviewer(py::module& m)
         }, "data"_a)
         .def_static("plot", [](SpectralVolumeData data)
         {
-            plot(std::move(data));
+            plot(CompositeVolume{ std::move(data) });
         }, "data"_a)
         .def_static("plot", [](VoxelVolume<float> data)
         {
-            plot({ std::move(data) });
+            plot(CompositeVolume{ std::move(data) });
         }, "data"_a);
     
     m.def("plot", [](CTL::CompositeVolume data)
@@ -39,10 +39,10 @@ void init_volumeviewer(py::module& m)
         }, "data"_a)
         .def("plot", [](SpectralVolumeData data)
         {
-            plot(std::move(data));
+            plot(CompositeVolume{ std::move(data) });
         }, "data"_a)
         .def("plot", [](VoxelVolume<float> data)
         {
-            plot({ std::move(data) });
+            plot(CompositeVolume{ std::move(data) });
         }, "data"_a);
 }

@@ -77,7 +77,7 @@ with open(os.path.join(this_directory, 'README.md'), encoding='utf-8') as f:
 
 setup(
     name='pyctl',
-    version='0.1.1',
+    version='0.1.2',
     author='Philipp Ernst',
     author_email='philipp.ernst@ovgu.de',
     url='https://github.com/phernst/pyctl',

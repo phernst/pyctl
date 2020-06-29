@@ -1,5 +1,6 @@
 #include <pybind11/pybind11.h>
 #include <projectors/arealfocalspotextension.h>
+#include "pysrc/pysharedptr.h"
 
 namespace py = pybind11;
 
@@ -8,13 +9,13 @@ void init_arealfocalspotextension(py::module& m)
     using namespace CTL;
     using namespace py::literals;
 
-    py::class_<ArealFocalSpotExtension, ProjectorExtension>(m, "ArealFocalSpotExtension")
+    py::class_<ArealFocalSpotExtension, ProjectorExtension, PySharedPtr<ArealFocalSpotExtension>>(m, "ArealFocalSpotExtension")
         .def(py::init<>())
         .def(py::init([](py::tuple discretization, bool lowExtAppr)
         {
-            return std::unique_ptr<ArealFocalSpotExtension>(new ArealFocalSpotExtension(
+            return make_pysharedptr<ArealFocalSpotExtension>(
                 QSize(discretization[0].cast<int>(), discretization[1].cast<int>()),
-                lowExtAppr));
+                lowExtAppr);
         }), "discretization"_a, "low_extinction_approximation"_a = false)
         .def("set_discretization", [](ArealFocalSpotExtension* self, py::tuple discr)
         {

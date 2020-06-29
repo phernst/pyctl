@@ -19,6 +19,11 @@ void init_gui(py::module& m)
     m.def("init_qapp", []() { qAppInstance(); });
     m.def("show", []()
     {
+        if(FigureManager::instance().empty())
+        {
+            return;
+        }
+        
         FigureManager::instance().showAllAndClear();
         qAppInstance()->exec();
     });
