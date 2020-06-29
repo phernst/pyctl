@@ -66,7 +66,9 @@ static py::class_<CTL::mat::Matrix<Rows,Cols>> createPyMatrix(py::module& m, con
 void init_matrix(py::module& m)
 {
     createPyMatrix<3,3>(m, "Matrix3x3");
+    createPyMatrix<3,4>(m, "Matrix3x4"); // needed for ProjectionMatrix
     createPyMatrix<3,1>(m, "Vector3x1");
+    createPyMatrix<2,1>(m, "Vector2x1"); // needed for ProjectionMatrix
     
     py::implicitly_convertible<
         py::array_t<double,py::array::c_style|py::array::forcecast>,
@@ -74,5 +76,13 @@ void init_matrix(py::module& m)
 
     py::implicitly_convertible<
         py::array_t<double,py::array::c_style|py::array::forcecast>,
+        CTL::mat::Matrix<3,4>>();
+
+    py::implicitly_convertible<
+        py::array_t<double,py::array::c_style|py::array::forcecast>,
         CTL::mat::Matrix<3,1>>();
+    
+    py::implicitly_convertible<
+        py::array_t<double,py::array::c_style|py::array::forcecast>,
+        CTL::mat::Matrix<2,1>>();
 }

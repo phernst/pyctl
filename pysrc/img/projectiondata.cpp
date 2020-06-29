@@ -40,6 +40,7 @@ void init_projectiondata(py::module& m)
         .def("view_dimensions", &ProjectionData::viewDimensions)
         .def("append", static_cast<void(ProjectionData::*)(const SingleViewData&)>
             (&ProjectionData::append), "single_view"_a, py::keep_alive<1,2>())
+        .def("combined", &ProjectionData::combined, "layout"_a = ModuleLayout())
         .def("fill", &ProjectionData::fill, "fill_value"_a)
         .def("max", &ProjectionData::max)
         .def("min", &ProjectionData::min)

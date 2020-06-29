@@ -49,7 +49,7 @@ void init_ctsystem(py::module& m)
         .def("add_component", [](CTSystem& self, SystemComponent* c)
         {
             self.addComponent(c);
-        }, "component"_a, py::keep_alive<0, 1>())
+        }, "component"_a, py::keep_alive<1, 2>())
         .def("clear", &CTSystem::clear)
         .def("is_empty", &CTSystem::isEmpty)
         .def("is_valid", &CTSystem::isValid)
