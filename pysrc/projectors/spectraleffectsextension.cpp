@@ -1,5 +1,6 @@
 #include <pybind11/pybind11.h>
 #include <projectors/spectraleffectsextension.h>
+#include "../pysharedptr.h"
 
 namespace py = pybind11;
 
@@ -8,7 +9,7 @@ void init_spectraleffectsextension(py::module& m)
     using namespace CTL;
     using namespace py::literals;
 
-    py::class_<SpectralEffectsExtension, ProjectorExtension>(m, "SpectralEffectsExtension")
+    py::class_<SpectralEffectsExtension, ProjectorExtension, PySharedPtr<SpectralEffectsExtension>>(m, "SpectralEffectsExtension")
         .def(py::init<>())
         .def(py::init<float>(), "energy_bin_width"_a)
         .def("project_composite", &SpectralEffectsExtension::projectComposite, "volume"_a)

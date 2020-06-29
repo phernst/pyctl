@@ -2,6 +2,7 @@
 #include <projectors/raycasterprojectorcpu.h>
 #include <components/abstractdetector.h>
 #include <acquisition/acquisitionsetup.h>
+#include "../pysharedptr.h"
 
 namespace py = pybind11;
 
@@ -10,7 +11,7 @@ void init_raycasterprojectorcpu(py::module& m)
     using namespace CTL;
     using namespace py::literals;
 
-    auto rcp = py::class_<RayCasterProjectorCPU, AbstractProjector>(m, "RayCasterProjectorCPU")
+    auto rcp = py::class_<RayCasterProjectorCPU, AbstractProjector, PySharedPtr<RayCasterProjectorCPU>>(m, "RayCasterProjectorCPU")
         .def(py::init<>())
         .def("configure", &RayCasterProjectorCPU::configure, "setup"_a, py::keep_alive<1,2>())
         .def("project", &RayCasterProjectorCPU::project, "volume"_a)

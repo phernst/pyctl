@@ -2,6 +2,7 @@
 #include <projectors/standardpipeline.h>
 #include <acquisition/acquisitionsetup.h>
 #include <QSize>
+#include "pysrc/pysharedptr.h"
 
 namespace py = pybind11;
 
@@ -101,7 +102,7 @@ void init_standardpipeline(py::module& m)
     using namespace CTL;
     using namespace py::literals;
 
-    auto sp = py::class_<StandardPipeline, AbstractProjector>(m, "StandardPipeline");
+    auto sp = py::class_<StandardPipeline, AbstractProjector, PySharedPtr<StandardPipeline>>(m, "StandardPipeline");
     auto afs = py::class_<PySAFS>(sp, "SettingsAFS");
     auto ds = py::class_<PySDS>(sp, "SettingsDetectorSaturation");
     auto pn = py::class_<PyPN>(sp, "SettingsPoissonNoise");
