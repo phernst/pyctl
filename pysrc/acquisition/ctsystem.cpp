@@ -48,7 +48,7 @@ void init_ctsystem(py::module& m)
         .def("nb_components", &CTSystem::nbComponents)
         .def("add_component", [](CTSystem& self, SystemComponent* c)
         {
-            self.addComponent(c);
+            self.addComponent(c->clone());  // TODO: modify when PySharedPtr is used
         }, "component"_a, py::keep_alive<1, 2>())
         .def("clear", &CTSystem::clear)
         .def("is_empty", &CTSystem::isEmpty)

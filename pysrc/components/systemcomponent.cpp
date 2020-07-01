@@ -8,20 +8,20 @@ void init_systemcomponent(py::module& m)
     using namespace CTL;
     using namespace py::literals;
 
-    // TODO - holder type necessary?
+    // TODO - use PySharedPtr
     py::class_<SystemComponent, std::shared_ptr<SystemComponent>>(m, "SystemComponent")
         .def(py::init<>())
         .def("elemental_type", &SystemComponent::elementalType)
-        .def("info", [](const SystemComponent* self)
+        .def("info", [](const SystemComponent& self)
         {
-            return self->info().toStdString();
+            return self.info().toStdString();
         })
-        .def("name", [](const SystemComponent* self)
+        .def("name", [](const SystemComponent& self)
         {
-            return self->name().toStdString();
+            return self.name().toStdString();
         })
-        .def("rename", [](SystemComponent* self, const std::string& name)
+        .def("rename", [](SystemComponent& self, const std::string& name)
         {
-            self->rename(QString::fromStdString(name));
+            self.rename(QString::fromStdString(name));
         }, "name"_a);
 }
