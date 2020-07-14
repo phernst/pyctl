@@ -10,14 +10,15 @@ static py::class_<CTL::Chunk2D<T>> createPyChunk2D(py::module& m, const char* na
 {
     using namespace CTL;
     using namespace py::literals;
+    using Ch_ = Chunk2D<T>;
 
-    return py::class_<Chunk2D<T>>(m, name)
-        .def(py::init([](py::tuple dims) -> Chunk2D<T>
+    return py::class_<Ch_>(m, name)
+        .def(py::init([](py::tuple dims) -> Ch_
         {
             return { dims[0].cast<uint>(), dims[1].cast<uint>() };
         }), "dimensions"_a)
         .def(py::init<uint, uint>(), "width"_a, "height"_a)
-        .def("dimensions", [](const Chunk2D<T>* self)
+        .def("dimensions", [](const Ch_* self)
         {
             const auto& dims = self->dimensions();
             auto pydims { py::tuple(2) };
@@ -25,13 +26,23 @@ static py::class_<CTL::Chunk2D<T>> createPyChunk2D(py::module& m, const char* na
             pydims[1] = dims.height;
             return pydims;
         })
-        .def("max", &Chunk2D<T>::max)
-        .def("min", &Chunk2D<T>::min)
-        .def("data", static_cast<std::vector<T>&(Chunk2D<T>::*)()>(&Chunk2D<T>::data))
-        .def("height", &Chunk2D<T>::height)
-        .def("width", &Chunk2D<T>::width)
-        .def("fill", &Chunk2D<T>::fill, "fill_value"_a)
-        .def("numpy", [](const Chunk2D<T>& self) -> py::array_t<T>
+        .def("max", &Ch_::max)
+        .def("min", &Ch_::min)
+        .def("data", static_cast<std::vector<T>&(Ch_::*)()>(&Ch_::data))
+        .def("height", &Ch_::height)
+        .def("width", &Ch_::width)
+        .def("fill", &Ch_::fill, "fill_value"_a)
+        .def("__eq__", [](const Ch_& self, const Ch_& rhs) { return self == rhs; }, "other"_a)
+        .def("__ne__", [](const Ch_& self, const Ch_& rhs) { return self != rhs; }, "other"_a)
+        .def("__iadd__", [](Ch_& self, const Ch_& rhs) { return self += rhs; }, "rhs"_a)
+        .def("__isub__", [](Ch_& self, const Ch_& rhs) { return self -= rhs; }, "rhs"_a)
+        .def("__imul__", [](Ch_& self, const T& s) { return self *= s; }, "factor"_a)
+        .def("__itruediv__", [](Ch_& self, const T& s) { return self /= s; }, "divisor"_a)
+        .def("__add__", [](const Ch_& self, const Ch_& rhs) { return self + rhs; }, "rhs"_a)
+        .def("__sub__", [](const Ch_& self, const Ch_& rhs) { return self - rhs; }, "rhs"_a)
+        .def("__mul__", [](const Ch_& self, const T& s) { return self*s; }, "factor"_a)
+        .def("__truediv__", [](const Ch_& self, const T& s) { return self/s; }, "divisor"_a)
+        .def("numpy", [](const Ch_& self) -> py::array_t<T>
         {
             return {
                 { self.height(), self.width() },
@@ -39,20 +50,20 @@ static py::class_<CTL::Chunk2D<T>> createPyChunk2D(py::module& m, const char* na
                 self.rawData()
             };
         }, "Copies the internal data into a new NumPy array of shape [height, width]")
-        .def("__getitem__", [](const Chunk2D<T>& self, py::tuple t)
+        .def("__getitem__", [](const Ch_& self, py::tuple t)
         {
             const auto x = t[0].cast<uint>();
             const auto y = t[1].cast<uint>();
             return self(x, y);
         }, "pos"_a)
-        .def("__setitem__", [](Chunk2D<T>& self, py::tuple t, const T& val)
+        .def("__setitem__", [](Ch_& self, py::tuple t, const T& val)
         {
             const auto x = t[0].cast<uint>();
             const auto y = t[1].cast<uint>();
             self(x, y) = val;
         }, "pos"_a, "value"_a)
         .def_static("from_numpy", [](py::array_t<T,py::array::c_style|py::array::forcecast> array)
-        -> Chunk2D<T>
+        -> Ch_
         {
             const auto info { array.request() };
             const auto width { static_cast<uint>(info.shape[1]) };

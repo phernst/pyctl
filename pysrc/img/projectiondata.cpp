@@ -9,6 +9,7 @@ void init_projectiondata(py::module& m)
 {
     using namespace CTL;
     using namespace py::literals;
+    using PD_ = ProjectionData;
 
     py::class_<ProjectionData>(m, "ProjectionData")
         .def(py::init([](py::tuple dims)
@@ -50,6 +51,16 @@ void init_projectiondata(py::module& m)
             (&ProjectionData::transformToIntensity), "i0"_a = 1.0)
         .def("transform_to_counts", static_cast<void(ProjectionData::*)(double)>
             (&ProjectionData::transformToCounts), "N0"_a = 1.0)
+        .def("__eq__", [](const PD_& self, const PD_& rhs) { return self == rhs; }, "other"_a)
+        .def("__ne__", [](const PD_& self, const PD_& rhs) { return self != rhs; }, "other"_a)
+        .def("__iadd__", [](PD_& self, const PD_& rhs) { return self += rhs; }, "rhs"_a)
+        .def("__isub__", [](PD_& self, const PD_& rhs) { return self -= rhs; }, "rhs"_a)
+        .def("__imul__", [](PD_& self, float s) { return self *= s; }, "factor"_a)
+        .def("__itruediv__", [](PD_& self, float s) { return self /= s; }, "divisor"_a)
+        .def("__add__", [](const PD_& self, const PD_& rhs) { return self + rhs; }, "rhs"_a)
+        .def("__sub__", [](const PD_& self, const PD_& rhs) { return self - rhs; }, "rhs"_a)
+        .def("__mul__", [](const PD_& self, float s) { return self*s; }, "factor"_a)
+        .def("__truediv__", [](const PD_& self, float s) { return self/s; }, "divisor"_a)
         .def("numpy", [](const ProjectionData& self) -> py::array_t<float>
         {
             const auto& dims { self.dimensions() };

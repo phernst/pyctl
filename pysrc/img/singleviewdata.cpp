@@ -7,6 +7,7 @@ void init_singleviewdata(py::module& m)
 {
     using namespace CTL;
     using namespace py::literals;
+    using SVD_ = SingleViewData;
 
     py::class_<SingleViewData>(m, "SingleViewData")
         .def(py::init([](py::tuple dims)
@@ -45,5 +46,15 @@ void init_singleviewdata(py::module& m)
         .def("min", &SingleViewData::min)
         .def("transform_to_extinction", &SingleViewData::transformToExtinction, "i0_or_N0"_a = 1.0)
         .def("transform_to_intensity", &SingleViewData::transformToIntensity, "i0"_a = 1.0)
-        .def("transform_to_counts", &SingleViewData::transformToCounts, "N0"_a = 1.0);
+        .def("transform_to_counts", &SingleViewData::transformToCounts, "N0"_a = 1.0)
+        .def("__eq__", [](const SVD_& self, const SVD_& rhs) { return self == rhs; }, "other"_a)
+        .def("__ne__", [](const SVD_& self, const SVD_& rhs) { return self != rhs; }, "other"_a)
+        .def("__iadd__", [](SVD_& self, const SVD_& rhs) { return self += rhs; }, "rhs"_a)
+        .def("__isub__", [](SVD_& self, const SVD_& rhs) { return self -= rhs; }, "rhs"_a)
+        .def("__imul__", [](SVD_& self, float s) { return self *= s; }, "factor"_a)
+        .def("__itruediv__", [](SVD_& self, float s) { return self /= s; }, "divisor"_a)
+        .def("__add__", [](const SVD_& self, const SVD_& rhs) { return self + rhs; }, "rhs"_a)
+        .def("__sub__", [](const SVD_& self, const SVD_& rhs) { return self - rhs; }, "rhs"_a)
+        .def("__mul__", [](const SVD_& self, float s) { return self*s; }, "factor"_a)
+        .def("__truediv__", [](const SVD_& self, float s) { return self/s; }, "divisor"_a);
 }

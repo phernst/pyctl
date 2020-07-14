@@ -38,6 +38,19 @@ static py::class_<CTL::mat::Matrix<Rows,Cols>> createPyMatrix(py::module& m, con
             std::copy_n(static_cast<double*>(info.ptr), Rows*Cols, result.data());
             return result;
         }), "init_array")
+        .def("__neg__", [](const Mat_& self) { return -self; })
+        .def("__imul__", [](Mat_& self, double s) { return self *= s; }, "scalar"_a)
+        .def("__itruediv__", [](Mat_& self, double s) { return self /= s; }, "scalar"_a)
+        .def("__iadd__", [](Mat_& self, const Mat_& rhs) { return self += rhs; }, "rhs"_a)
+        .def("__isub__", [](Mat_& self, const Mat_& rhs) { return self -= rhs; }, "rhs"_a)
+        .def("__imul__", [](Mat_& self, const Mat_& rhs) { return self %= rhs; }, "rhs"_a)
+        .def("__itruediv__", [](Mat_& self, const Mat_& rhs) { return self |= rhs; }, "rhs"_a)
+        .def("__mul__", [](const Mat_& self, double s) { return self*s; }, "scalar"_a)
+        .def("__truediv__", [](const Mat_& self, double s) { return self/s; }, "scalar"_a)
+        .def("__add__", [](const Mat_& self, const Mat_& rhs) { return self + rhs; }, "rhs"_a)
+        .def("__sub__", [](const Mat_& self, const Mat_& rhs) { return self - rhs; }, "rhs"_a)
+        .def("__mul__", [](const Mat_& self, const Mat_& rhs) { return self%rhs; }, "rhs"_a)
+        .def("__truediv__", [](const Mat_& self, const Mat_& rhs) { return self|rhs; }, "rhs"_a)
         .def("__repr__", [](const Mat_& self)
         {
             auto repr { std::stringstream() };

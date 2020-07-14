@@ -9,6 +9,7 @@ static py::class_<CTL::VoxelVolume<T>> createPyVoxelVolume(py::module& m, const 
 {
     using namespace CTL;
     using namespace py::literals;
+    using VV_ = VoxelVolume<T>;
 
     return py::class_<VoxelVolume<T>>(m, name)
         .def(py::init([](py::tuple dims)
@@ -21,27 +22,27 @@ static py::class_<CTL::VoxelVolume<T>> createPyVoxelVolume(py::module& m, const 
                 dims[0].cast<uint>(), dims[1].cast<uint>(), dims[2].cast<uint>(),
                 sizes[0].cast<float>(), sizes[1].cast<float>(), sizes[2].cast<float>());
         }), "nb_voxels"_a, "voxel_size"_a)
-        .def("dimensions", [](const VoxelVolume<T>* self)
+        .def("dimensions", [](const VoxelVolume<T>& self)
         {
-            const auto& dims = self->dimensions();
+            const auto& dims = self.dimensions();
             auto pydims { py::tuple(3) };
             pydims[0] = dims.x;
             pydims[1] = dims.y;
             pydims[2] = dims.z;
             return pydims;
         })
-        .def("voxel_size", [](const VoxelVolume<T>* self)
+        .def("voxel_size", [](const VoxelVolume<T>& self)
         {
-            const auto& vs = self->voxelSize();
+            const auto& vs = self.voxelSize();
             auto pyvs { py::tuple(3) };
             pyvs[0] = vs.x;
             pyvs[1] = vs.y;
             pyvs[2] = vs.z;
             return pyvs;
         })
-        .def("offset", [](const VoxelVolume<T>* self)
+        .def("offset", [](const VoxelVolume<T>& self)
         {
-            const auto& offset = self->offset();
+            const auto& offset = self.offset();
             auto pyoffset { py::tuple(3) };
             pyoffset[0] = offset.x;
             pyoffset[1] = offset.y;
@@ -52,16 +53,16 @@ static py::class_<CTL::VoxelVolume<T>> createPyVoxelVolume(py::module& m, const 
         .def("total_voxel_count", &VoxelVolume<T>::totalVoxelCount)
         .def("max", &VoxelVolume<T>::max)
         .def("min", &VoxelVolume<T>::min)
-        .def("set_volume_offset", [](VoxelVolume<T>* self, py::tuple offset)
+        .def("set_volume_offset", [](VoxelVolume<T>& self, py::tuple offset)
         {
-            self->setVolumeOffset(
+            self.setVolumeOffset(
                 offset[0].cast<float>(),
                 offset[1].cast<float>(),
                 offset[2].cast<float>());
         }, "offset"_a)
-        .def("set_voxel_size", [](VoxelVolume<T>* self, py::tuple size)
+        .def("set_voxel_size", [](VoxelVolume<T>& self, py::tuple size)
         {
-            self->setVoxelSize(
+            self.setVoxelSize(
                 size[0].cast<float>(),
                 size[1].cast<float>(),
                 size[2].cast<float>());
@@ -75,6 +76,18 @@ static py::class_<CTL::VoxelVolume<T>> createPyVoxelVolume(py::module& m, const 
             "fill_value"_a)
         .def_static("cylinder_z", &VoxelVolume<T>::cylinderZ, "radius"_a, "height"_a, "voxel_size"_a,
             "fill_value"_a)
+        .def("__iadd__", [](VV_& self, const VV_& rhs) { return self += rhs; }, "other"_a)
+        .def("__isub__", [](VV_& self, const VV_& rhs) { return self -= rhs; }, "other"_a)
+        .def("__iadd__", [](VV_& self, float s) { return self += s; }, "additive_shift"_a)
+        .def("__isub__", [](VV_& self, float s) { return self -= s; }, "subtractive_shift"_a)
+        .def("__imul__", [](VV_& self, float s) { return self *= s; }, "factor"_a)
+        .def("__itruediv__", [](VV_& self, float s) { return self /= s; }, "divisor"_a)
+        .def("__add__", [](const VV_& self, const VV_& rhs) { return self + rhs; }, "rhs"_a)
+        .def("__sub__", [](const VV_& self, const VV_& rhs) { return self - rhs; }, "rhs"_a)
+        .def("__add__", [](const VV_& self, float s) { return self + s; }, "additive_shift"_a)
+        .def("__sub__", [](const VV_& self, float s) { return self - s; }, "subtractive_shift"_a)
+        .def("__mul__", [](const VV_& self, float s) { return self*s; }, "factor"_a)
+        .def("__truediv__", [](const VV_& self, float s) { return self/s; }, "divisor"_a)
         .def("numpy", [](const VoxelVolume<T>& self) -> py::array_t<T>
         {
             const auto& dims { self.dimensions() };
