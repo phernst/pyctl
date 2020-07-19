@@ -54,4 +54,16 @@ void init_trajectories(py::module& m)
         .def("prepare_steps", &pr::AxialScanTrajectory::prepareSteps, "view_nb"_a, "setup"_a)
         .def("is_applicable_to", &pr::AxialScanTrajectory::isApplicableTo, "setup"_a)
         .def("set_start_angle", &pr::AxialScanTrajectory::setStartAngle, "start_angle"_a);
+
+    py::class_<pr::TomosynthesisCircleTrajectory, AbstractPreparationProtocol>(m,
+        "TomosynthesisCircleTrajectory")
+        .def(py::init<double, double>(), "source_to_isocenter"_a, "tomo_angle"_a = 15.0_deg)
+        .def("prepare_steps", &pr::TomosynthesisCircleTrajectory::prepareSteps, "view_nb"_a, "setup"_a)
+        .def("is_applicable_to", &pr::TomosynthesisCircleTrajectory::isApplicableTo, "setup"_a);
+
+    py::class_<pr::TomosynthesisSaddleTrajectory, AbstractPreparationProtocol>(m,
+        "TomosynthesisSaddleTrajectory")
+        .def(py::init<double, double>(), "source_to_isocenter"_a, "tomo_angle"_a = 15.0_deg)
+        .def("prepare_steps", &pr::TomosynthesisSaddleTrajectory::prepareSteps, "view_nb"_a, "setup"_a)
+        .def("is_applicable_to", &pr::TomosynthesisSaddleTrajectory::isApplicableTo, "setup"_a);
 }
