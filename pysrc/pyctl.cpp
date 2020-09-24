@@ -4,7 +4,7 @@ namespace py = pybind11;
 
 void init_mat(py::module&);
 void init_deg(py::module&);
-void init_coordinates(py::module&);
+void init_range(py::module&);
 
 void init_ocl(py::module&);
 void init_acquisitionsetup(py::module&);
@@ -72,7 +72,7 @@ PYBIND11_MODULE(_ctl, m) {
 
     init_mat(mat);
     init_deg(m);
-    init_coordinates(m);
+    init_range(m);
     init_abstractprojector(m);
     init_raycasterprojectorcpu(m);
     init_ctldatabase(m, database);
