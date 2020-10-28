@@ -3,7 +3,7 @@
 namespace py = pybind11;
 
 void init_mat(py::module&);
-void init_coordinates(py::module&);
+void init_range(py::module&);
 
 void init_ocl(py::module&);
 void init_acquisitionsetup(py::module&);
@@ -44,6 +44,7 @@ void init_chunk2d(py::module&);
 void init_compositevolume(py::module&);
 void init_singleviewdata(py::module&);
 void init_projectiondata(py::module&);
+void init_projectiondataview(py::module&);
 void init_voxelvolume(py::module&);
 void init_spectralvolumedata(py::module&);
 
@@ -58,6 +59,8 @@ void init_spectraleffectsextension(py::module&);
 void init_projectionpipeline(py::module&);
 void init_standardpipeline(py::module&);
 
+void init_abstractreconstructor(py::module&);
+
 void init_gui(py::module&);
 
 PYBIND11_MODULE(_ctl, m) {
@@ -70,7 +73,7 @@ PYBIND11_MODULE(_ctl, m) {
     auto protocols { m.def_submodule("protocols") };
 
     init_mat(mat);
-    init_coordinates(m);
+    init_range(m);
     init_abstractprojector(m);
     init_raycasterprojectorcpu(m);
     init_ctldatabase(m, database);
@@ -117,11 +120,14 @@ PYBIND11_MODULE(_ctl, m) {
     init_compositevolume(m);
     init_singleviewdata(m);
     init_projectiondata(m);
+    init_projectiondataview(m);
     init_voxelvolume(m);
     init_spectralvolumedata(m);
     init_viewgeometry(m);
     init_geometrydecoder(m);
     init_geometryencoder(m);
+
+    init_abstractreconstructor(m);
 
     init_gui(gui);
 }
