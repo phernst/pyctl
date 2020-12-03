@@ -1,5 +1,5 @@
 #include <pybind11/pybind11.h>
-#include <processing/coordinates.h>
+#include <processing/range.h>
 #include <sstream>
 
 namespace py = pybind11;
@@ -36,7 +36,7 @@ static py::class_<CTL::Range<T>> createPyRange(py::module& m, const char* name)
         });
 }
 
-void init_coordinates(py::module& m)
+void init_range(py::module& m)
 {
     using namespace CTL;
     using namespace py::literals;
