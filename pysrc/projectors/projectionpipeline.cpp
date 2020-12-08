@@ -19,6 +19,7 @@ void init_projectionpipeline(py::module& m)
             return make_pysharedptr<ProjectionPipeline>(proj.release_to_ctl());
         }), "projector"_a = nullptr, py::keep_alive<1,2>())
         .def("project_composite", &ProjectionPipeline::projectComposite, "volume"_a)
+        .def("project_sparse", &ProjectionPipeline::projectSparse, "volume"_a)
         .def("is_linear", &ProjectionPipeline::isLinear)
         .def("append_extension", [](ProjectionPipeline& self, const ExtensionPtr& ext)
         {

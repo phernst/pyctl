@@ -19,6 +19,7 @@ void init_abstractprojector(py::module& m)
         })
         .def("is_linear", &AbstractProjector::isLinear)
         .def("project_composite", &AbstractProjector::projectComposite, "volume"_a)
+        .def("project_sparse", &AbstractProjector::projectSparse, "volume"_a)
         .def("configure_and_project", [](AbstractProjector& self,
                                          const AcquisitionSetup& setup,
                                          const VolumeData& volume)

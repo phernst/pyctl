@@ -13,6 +13,7 @@ void init_spectraleffectsextension(py::module& m)
         .def(py::init<>())
         .def(py::init<float>(), "energy_bin_width"_a)
         .def("project_composite", &SpectralEffectsExtension::projectComposite, "volume"_a)
+        .def("project_sparse", &SpectralEffectsExtension::projectSparse, "volume"_a)
         .def("is_linear", &SpectralEffectsExtension::isLinear)
         .def("set_spectral_sampling_resolution",
             &SpectralEffectsExtension::setSpectralSamplingResolution, "energy_bin_width"_a);

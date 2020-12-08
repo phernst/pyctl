@@ -119,6 +119,7 @@ void init_standardpipeline(py::module& m)
             return self->project(vol);
         }, "volume"_a)
         .def("project_composite", &StandardPipeline::projectComposite, "volume"_a)
+        .def("project_sparse", &StandardPipeline::projectSparse, "volume"_a)
         .def("is_linear", &StandardPipeline::isLinear)
         .def("enable_areal_focal_spot", &StandardPipeline::enableArealFocalSpot, "enable"_a = true)
         .def("enable_detector_saturation", &StandardPipeline::enableDetectorSaturation, "enable"_a = true)

@@ -13,5 +13,6 @@ void init_dynamicprojectorextension(py::module& m)
         .def(py::init<>())
         .def("configure", &DynamicProjectorExtension::configure, "setup"_a, py::keep_alive<1,2>())
         .def("project", &DynamicProjectorExtension::project, "volume"_a)
-        .def("project_composite", &DynamicProjectorExtension::projectComposite, "volume"_a);
+        .def("project_composite", &DynamicProjectorExtension::projectComposite, "volume"_a)
+        .def("project_sparse", &DynamicProjectorExtension::projectSparse, "volume"_a);
 }

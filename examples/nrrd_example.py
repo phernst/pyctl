@@ -1,10 +1,7 @@
 import argparse
-import sys
 
 import ctl
 import nrrd
-import numpy as np
-from matplotlib import pyplot as plt
 
 def main(path_to_nrrd):
     # load the nrrd file
@@ -27,7 +24,7 @@ def main(path_to_nrrd):
     setup = ctl.AcquisitionSetup(system, nb_views)
 
     # add a predefined trajectory to the setup from ctl.protocols
-    angle_span = np.deg2rad(200.0) # rad is the standard unit for angles
+    angle_span = ctl.deg2rad(200.0) # rad is the standard unit for angles
     source_to_isocenter = 750.0 # mm is the standard unit for length dimensions
     setup.apply_preparation_protocol(ctl.protocols.WobbleTrajectory(angle_span,
                                                                     source_to_isocenter))

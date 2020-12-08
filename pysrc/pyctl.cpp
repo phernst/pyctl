@@ -45,8 +45,13 @@ void init_chunk2d(py::module&);
 void init_compositevolume(py::module&);
 void init_singleviewdata(py::module&);
 void init_projectiondata(py::module&);
+void init_projectiondataview(py::module&);
 void init_voxelvolume(py::module&);
+void init_sparsevoxelvolume(py::module&);
 void init_spectralvolumedata(py::module&);
+
+void init_abstractvolumesparsifier(py::module&);
+void init_thresholdvolumesparsifier(py::module&);
 
 void init_abstractprojector(py::module&);
 void init_raycasterprojectorcpu(py::module&);
@@ -58,6 +63,10 @@ void init_poissonnoiseextension(py::module&);
 void init_spectraleffectsextension(py::module&);
 void init_projectionpipeline(py::module&);
 void init_standardpipeline(py::module&);
+
+void init_abstractreconstructor(py::module&);
+void init_simplebackprojectorcpu(py::module&);
+void init_artreconstructor(py::module&);
 
 void init_gui(py::module&);
 
@@ -78,7 +87,7 @@ PYBIND11_MODULE(_ctl, m) {
     init_ctldatabase(m, database);
     init_abstractdatamodel(m);
     init_detectorsaturationmodels(m);
-    init_ocl(ocl);
+    
     init_projectorextension(m);
     init_arealfocalspotextension(m);
     init_detectorsaturationextension(m);
@@ -119,11 +128,21 @@ PYBIND11_MODULE(_ctl, m) {
     init_compositevolume(m);
     init_singleviewdata(m);
     init_projectiondata(m);
+    init_projectiondataview(m);
     init_voxelvolume(m);
+    init_sparsevoxelvolume(m);
     init_spectralvolumedata(m);
     init_viewgeometry(m);
     init_geometrydecoder(m);
     init_geometryencoder(m);
+
+    init_abstractvolumesparsifier(m);
+    init_thresholdvolumesparsifier(m);
+
+    init_abstractreconstructor(m);
+    init_simplebackprojectorcpu(m);
+    init_artreconstructor(m);
+    init_ocl(ocl);
 
     init_gui(gui);
 }

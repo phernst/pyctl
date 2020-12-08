@@ -2,7 +2,7 @@
 
 #include <pybind11/cast.h>
 
-// PySharedPtr is a smart pointer like std::shared_ptr, that retaines shared ownership of an object
+// PySharedPtr is a smart pointer like std::shared_ptr, that retains shared ownership of an object
 // through a pointer. Additionally, it provides a method to release the ownership of the
 // internal pointer to let it be managed by the CTL. This prevents the memory pointed to by the
 // internal pointer to be deleted more than once.
