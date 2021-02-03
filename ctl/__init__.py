@@ -1,15 +1,4 @@
-try:
-    from importlib.resources import path
-    cl_path = path('ctl', 'cl_src')
-    db_path = path('ctl', 'database')
-    del path
-except ImportError:
-    from importlib_resources import files
-    cl_path = files('ctl') / 'cl_src'
-    db_path = files('ctl') / 'database'
-    del files
-import atexit
-from contextlib import ExitStack
+from pkg_resources import resource_filename
 import ctypes
 from ctypes.util import find_library
 import sys
@@ -22,7 +11,7 @@ def _raise_if_wrong_env_qt():
     qt5core.qVersion.argtypes = []
     qt5core.qVersion.restype = ctypes.c_char_p
     qtver = ctypes.c_char_p(qt5core.qVersion()).value.decode()
-    raise RuntimeError(f'Qt5 version must be >=5.12,<5.15 (is {qtver}). '
+    raise RuntimeError(f'Qt5 version must be >=5.15 (is {qtver}). '
                        'Consider removing Qt from your environment paths.')
 
 try:
@@ -40,18 +29,11 @@ del sys
 del find_library
 del ctypes
 
-_file_manager = ExitStack()
-atexit.register(_file_manager.close)
-cl_source_dir = _file_manager.enter_context(cl_path)
-db_source_dir = _file_manager.enter_context(db_path)
+cl_source_dir = resource_filename('ctl', 'cl_src')
+db_source_dir = resource_filename('ctl', 'database')
 
-del ExitStack
-del atexit
-del cl_path
-del db_path
-
-_ctl.ocl.ClFileLoader.set_opencl_source_dir(str(cl_source_dir.resolve()))
-_ctl.CTLDatabaseHandler.set_database_root(str(db_source_dir.resolve()))
+_ctl.ocl.ClFileLoader.set_opencl_source_dir(cl_source_dir)
+_ctl.CTLDatabaseHandler.set_database_root(db_source_dir)
 del cl_source_dir
 del db_source_dir
 

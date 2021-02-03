@@ -91,6 +91,6 @@ setup(
     zip_safe=False,
     install_requires=[
         'importlib_resources;python_version<"3.7"',
-        'PySide2>=5.12,<5.15',
+        'PySide2>=5.15',
     ],
 )

@@ -63,6 +63,6 @@ void init_genericdetector(py::module& m)
         {
             self.setPixelSize({ size[0].cast<double>(), size[1].cast<double>() });
         }, "size"_a)
-        .def("set_skew_coefficient", &GenericDetector::setSkewCoefficient, "skew_coefficient"_a)
+        .def("set_skew_angle", &GenericDetector::setSkewAngle, "skew_angle"_a)
         .def_static("default_name", [](){ return GenericDetector::defaultName().toStdString(); });
 }
