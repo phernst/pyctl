@@ -29,14 +29,9 @@ set (CTL_FORMS
 $$insert_ctl_forms$$
 )
 	
-set (MOC_FILES ${CTL_DIR}/projectors/abstractprojector.h)
-	
-add_compile_definitions(
-    _USE_MATH_DEFINES
-    QT_NO_DEBUG_OUTPUT
-    QT_NO_WARNING_OUTPUT
-    GUI_WIDGETS_3D_MODULE_AVAILABLE
-    GUI_WIDGETS_CHARTS_MODULE_AVAILABLE
+set (MOC_FILES
+    ${CTL_DIR}/projectors/abstractprojector.h
+    ${CTL_DIR}/recon/abstractreconstructor.h
 )
 
 set (PYCTL_SOURCES
@@ -45,6 +40,13 @@ $$insert_pyctl_sources$$
 
 pybind11_add_module(_ctl MODULE ${PYCTL_SOURCES} ${CTL_SOURCES} ${CTL_FORMS} ${MOC_FILES})
 target_include_directories(_ctl PRIVATE ${CMAKE_CURRENT_SOURCE_DIR} ${CTL_DIR})
+target_compile_definitions(_ctl PRIVATE
+    _USE_MATH_DEFINES
+    QT_NO_DEBUG_OUTPUT
+    QT_NO_WARNING_OUTPUT
+    GUI_WIDGETS_3D_MODULE_AVAILABLE
+    GUI_WIDGETS_CHARTS_MODULE_AVAILABLE
+)
 target_link_libraries(_ctl PRIVATE
     Qt5::Core
     Qt5::Widgets

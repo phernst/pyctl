@@ -1,5 +1,5 @@
 #include <pybind11/pybind11.h>
-#include <models/detectorsaturationmodels.h>
+#include <models/datamodels1d.h>
 
 namespace py = pybind11;
 

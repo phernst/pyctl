@@ -25,8 +25,10 @@ static py::class_<CTL::Range<T>> createPyRange(py::module& m, const char* name)
         .def("width", &Range<T>::width)
         .def("spacing", &Range<T>::spacing, "nb_samples"_a)
         .def("center", &Range<T>::center)
-        .def("linspace", static_cast<std::vector<T>(Range<T>::*)(uint)const>(&Range<T>::linspace),
-            "nb_samples"_a)
+        .def("linspace", static_cast<std::vector<T>(Range<T>::*)(uint,bool)const>
+            (&Range<T>::linspace), "nb_samples"_a, "endpoint"_a=true)
+        .def("expspace", static_cast<std::vector<T>(Range<T>::*)(uint,bool)const>
+            (&Range<T>::expspace), "nb_samples"_a, "endpoint"_a=true)
         .def("__repr__", [](const Range<T>& self)
         {
             auto repr { std::stringstream() };

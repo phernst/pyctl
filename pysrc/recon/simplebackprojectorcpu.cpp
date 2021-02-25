@@ -12,6 +12,7 @@ void init_simplebackprojectorcpu(py::module& m)
     using SB_ = SimpleBackprojectorCPU;
 
     auto sbp = py::class_<SB_, AbstractReconstructor, PySharedPtr<SB_>>(m, "SimpleBackprojectorCPU");
+
     py::enum_<SB_::WeightingType>(sbp, "WeightingType")
         .value("DistanceWeightsOnly", SB_::WeightingType::DistanceWeightsOnly)
         .value("GeometryFactors", SB_::WeightingType::GeometryFactors)
