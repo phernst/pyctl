@@ -66,6 +66,10 @@ void init_projectionpipeline(py::module&);
 void init_standardpipeline(py::module&);
 
 void init_abstractreconstructor(py::module&);
+void init_abstractsubsetgenerator(py::module&);
+void init_transitionschemeextension(py::module&);
+void init_defaultsubsetgenerator(py::module&);
+void init_simplesubsetgenerator(py::module&);
 void init_simplebackprojectorcpu(py::module&);
 void init_artreconstructor(py::module&);
 
@@ -142,6 +146,10 @@ PYBIND11_MODULE(_ctl, m) {
     init_thresholdvolumesparsifier(m);
 
     init_abstractreconstructor(m);
+    init_abstractsubsetgenerator(m);
+    init_transitionschemeextension(m);
+    init_defaultsubsetgenerator(m);
+    init_simplesubsetgenerator(m);
     init_simplebackprojectorcpu(m);
     init_artreconstructor(m);
     init_ocl(ocl);

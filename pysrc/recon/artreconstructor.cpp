@@ -11,13 +11,14 @@ void init_artreconstructor(py::module& m)
 
     auto ar = py::class_<ARTReconstructor, AbstractReconstructor, PySharedPtr<ARTReconstructor>>(m, "ARTReconstructor");
     py::enum_<ARTReconstructor::StoppingCriterion>(ar, "StoppingCriterion", py::arithmetic())
-        .value("NoStoppingCriterion", ARTReconstructor::StoppingCriterion::NoStoppingCriterion)
-        .value("MaximumNbIterations", ARTReconstructor::StoppingCriterion::MaximumNbIterations)
-        .value("MaximumTime", ARTReconstructor::StoppingCriterion::MaximumTime)
-        .value("ProjectionErrorChange", ARTReconstructor::StoppingCriterion::ProjectionErrorChange)
-        .value("VolumeDomainChange", ARTReconstructor::StoppingCriterion::VolumeDomainChange)
-        .value("RelativeProjectionError", ARTReconstructor::StoppingCriterion::RelativeProjectionError)
-        .value("AllStoppingCriteria", ARTReconstructor::StoppingCriterion::AllStoppingCriteria)
+        .value("NoStoppingCriterion", ARTReconstructor::NoStoppingCriterion)
+        .value("MaximumNbIterations", ARTReconstructor::MaximumNbIterations)
+        .value("MaximumTime", ARTReconstructor::MaximumTime)
+        .value("ProjectionErrorChange", ARTReconstructor::ProjectionErrorChange)
+        .value("VolumeDomainChange", ARTReconstructor::VolumeDomainChange)
+        .value("RelativeProjectionError", ARTReconstructor::RelativeProjectionError)
+        .value("NormalEquationSatisfied", ARTReconstructor::NormalEquationSatisfied)
+        .value("AllStoppingCriteria", ARTReconstructor::AllStoppingCriteria)
         .export_values();
 
     ar.def(py::init<>())
@@ -43,10 +44,14 @@ void init_artreconstructor(py::module& m)
             (const AcquisitionSetup&,const VoxelVolume<float>&,uint)>
             (&ARTReconstructor::setRelaxationByEstimation),
             "setup"_a, "target_volume"_a, "nb_power_iter"_a = 1u)
-        // .def("set_subset_generator", [](ARTReconstructor& self, PySharedPtr<AbstractSubsetGenerator>& gen)
+        // .def("set_regularizer", [](ARTReconstructor& self, PySharedPtr<AbstractVolumeFilter> reg, bool en)
         // {
-        //     self.setSubsetGenerator(gen.release_to_ctl());
-        // }, "generator"_a) // TODO!
+        //     self.setRegularizer(reg.release_to_ctl(), en);
+        // }, "regularizer"_a, "enable_regularizer"_a = true) // TODO!
+        .def("set_subset_generator", [](ARTReconstructor& self, PySharedPtr<AbstractSubsetGenerator>& gen)
+        {
+            self.setSubsetGenerator(gen.release_to_ctl());
+        }, "generator"_a)
         .def("set_forward_projector", [](ARTReconstructor& self, PySharedPtr<AbstractProjector>& p)
         {
             self.setForwardProjector(p.release_to_ctl());
@@ -67,6 +72,8 @@ void init_artreconstructor(py::module& m)
             "min_relative_change"_a, "enable_criterion"_a = true)
         .def("set_min_relative_projection_error", &ARTReconstructor::setMinRelativeProjectionError,
             "min_relative_error"_a, "enable_criterion"_a = true)
+        .def("set_normal_eq_tolerance", &ARTReconstructor::setNormalEqTolerance,
+            "relative_tol"_a, "enable_criterion"_a = true)
         .def("set_stopping_criteria", &ARTReconstructor::setStoppingCriteria, "criteria"_a)
         .def("set_stopping_criterion_enabled", &ARTReconstructor::setStoppingCriterionEnabled,
             "criterion"_a, "enabled"_a = true)
@@ -79,9 +86,8 @@ void init_artreconstructor(py::module& m)
             "criteria"_a)
         .def("relaxation", &ARTReconstructor::relaxation)
         .def("stopping_criteria", &ARTReconstructor::stoppingCriteria)
-        .def("regularizer", &ARTReconstructor::regularizer);
-        // .def("custom_subset_generator", &ARTReconstructor::customSubsetGenerator)
-        // .def("default_subset_generator", &ARTReconstructor::defaultSubsetGenerator)
-        // .def("subset_generator", &ARTReconstructor::subsetGenerator) // TODO!
-
+        .def("regularizer", &ARTReconstructor::regularizer)
+        .def("custom_subset_generator", &ARTReconstructor::customSubsetGenerator)
+        .def("default_subset_generator", &ARTReconstructor::defaultSubsetGenerator)
+        .def("subset_generator", &ARTReconstructor::subsetGenerator);
 }

@@ -20,12 +20,19 @@ def main():
     reconstructor.set_relaxation_estimation_enabled(True)
     reconstructor.set_min_relative_projection_error(3e-2)
     reconstructor.set_max_nb_iterations(20)
+
+    # use a modified subset generator
+    subset_gen = ctl.DefaultSubsetGenerator()
+    subset_gen.set_order(ctl.DefaultSubsetGenerator.Orthogonal180),
+    reconstructor.set_subset_generator(subset_gen)
+
+    # reconstruct
     reco = ctl.VoxelVolumeF.cube(100, 0.5, 0.0)
     reconstructor.configure_and_reconstruct_to(setup, projections, reco)
 
     # output:
     # "IterativeReconstructor: Terminated due relative projection error below tolerance level
-    # (rel. error: 0.0294881 | threshold: 0.03)."
+    # (rel. error: 0.029831 | threshold: 0.03)."
 
     print(f'estimated relaxation: {reconstructor.relaxation()}')
 
