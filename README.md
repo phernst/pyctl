@@ -15,7 +15,7 @@ Install via pip:
 ```
 pip install pyctl
 ```
-Note: This package was compiled with Qt 5.12. If you have installed Qt<5.12 or >=5.15, please remove any reference
+Note: This package was compiled with Qt 5.15. If you have installed Qt<5.15 or >=6.0, please remove any reference
 to Qt directories from the `PATH` environment variable or compile and install the package from sources.
 
 # Compiling from sources
@@ -27,8 +27,8 @@ The following compilation guide has been tested on Windows 10 with MSVC 2019, CU
 * Install [Git](https://git-scm.com/). Clone this repository: `git clone --recursive https://github.com/phernst/pyctl.git`.
 * Install [Qt](https://www.qt.io/)>=5.12. During installation, you need to set at least:
     * Prebuilt components for MSVC 64-bit. Make sure the `PATH` environment variable is set accordingly
-      (e.g. `C:\Qt\5.14.1\msvc2017_64\bin`). Make sure the `CMAKE_PREFIX_PATH` environment variable
-      is set accordingly (e.g. `C:\Qt\5.14.1\msvc2017_64\lib\cmake\Qt5`).
+      (e.g. `C:\Qt\5.15.2\msvc2019_64\bin`). Make sure the `CMAKE_PREFIX_PATH` environment variable
+      is set accordingly (e.g. `C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5`).
     * Qt Charts
 * Install OpenCL 1.1/1.2:
     * Install latest NVIDIA driver.
@@ -37,14 +37,16 @@ The following compilation guide has been tested on Windows 10 with MSVC 2019, CU
 * Install Python 3 + pip. Recommended: use a virtual [conda environment](https://www.anaconda.com/).
 * `cd` into the cloned PyCTL directory and run `pip install .`
 
-## On Linux (not tested)
+## On Ubuntu
 * Install build tools: `sudo apt install build-essential`
 * Install CMake: `sudo apt install cmake`.
 * Install Git: `sudo apt install git`. Clone this repository: `git clone --recursive https://github.com/phernst/pyctl.git`.
 * Install Qt: `sudo apt install qt5-default qt3d5-dev libqt5charts5-dev`
+* Install Qt 3D plugins: `sudo apt install qt3d-assimpsceneimport-plugin qt3d-defaultgeometryloader-plugin qt3d-gltfsceneio-plugin qt3d-scene2d-plugin`
 * Install OpenCL 1.1/1.2:
     * Install official NVIDIA driver using Driver Manager --> reboot
     * Install NVIDIA OpenCL development package: `sudo apt install nvidia-opencl-dev`
+    * Install NVIDIA OpenCL installable client driver: `sudo apt install nvidia-opencl-icd-340`
     * Install OpenCL headers: `sudo apt install opencl-headers`
 * Install Python 3: `sudo apt install python3`. Recommended: use a virtual environment.
 * `cd` into the cloned PyCTL directory and run `pip install .`
@@ -115,6 +117,8 @@ if __name__ == '__main__':
 
 If everything works well, you should see this projection:
 ![example-projection](examples/readme_example.png?raw=true)
+
+This and more example scripts can be found in the 'examples' folder of this repository.
 
 If you have any problems or questions regarding the CTL or PyCTL, please contact us:  
 <sw4g.production@gmail.com>.

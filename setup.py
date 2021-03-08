@@ -92,6 +92,6 @@ setup(
     zip_safe=False,
     install_requires=[
         'importlib_resources;python_version<"3.7"',
-        'PySide2>=5.15',
+        'PySide2>=5.15',  # TODO: depends on which Qt version the pyctl package was compiled with
     ],
 )

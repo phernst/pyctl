@@ -12,6 +12,7 @@ def _raise_if_wrong_env_qt():
     qt5core.qVersion.argtypes = []
     qt5core.qVersion.restype = ctypes.c_char_p
     qtver = ctypes.c_char_p(qt5core.qVersion()).value.decode()
+    # TODO: the exception should show the Qt version that this package was compiled with
     raise RuntimeError(f'Qt5 version must be >=5.15 (is {qtver}). '
                        'Consider removing Qt from your environment paths.')
 
