@@ -1,4 +1,5 @@
 #include <pybind11/pybind11.h>
+#include <img/sparsevoxelvolume.h>
 #include <projectors/sfpprojector.h>
 #include <acquisition/acquisitionsetup.h>
 #include "../pysharedptr.h"

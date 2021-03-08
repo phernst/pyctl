@@ -1,4 +1,6 @@
 #include <pybind11/pybind11.h>
+#include <img/compositevolume.h>
+#include <img/sparsevoxelvolume.h>
 #include <projectors/projectionpipeline.h>
 #include "pysrc/pysharedptr.h"
 

@@ -1,6 +1,8 @@
 #include <pybind11/pybind11.h>
 #include <projectors/abstractprojector.h>
 #include <acquisition/acquisitionsetup.h>
+#include <img/compositevolume.h>
+#include <img/sparsevoxelvolume.h>
 #include "pysrc/pysharedptr.h"
 
 namespace py = pybind11;

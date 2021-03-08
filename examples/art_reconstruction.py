@@ -16,14 +16,14 @@ def main():
 
     # use art to reconstruct the volume, set some constraints
     reconstructor = ctl.ARTReconstructor()
-    reconstructor.set_positivity_constrain_enabled(True)
+    reconstructor.set_positivity_constraint_enabled(True)
     reconstructor.set_relaxation_estimation_enabled(True)
     reconstructor.set_min_relative_projection_error(3e-2)
     reconstructor.set_max_nb_iterations(20)
 
     # use a modified subset generator
     subset_gen = ctl.DefaultSubsetGenerator()
-    subset_gen.set_order(ctl.DefaultSubsetGenerator.Orthogonal180),
+    subset_gen.set_order(ctl.DefaultSubsetGenerator.Orthogonal180)
     reconstructor.set_subset_generator(subset_gen)
 
     # reconstruct
