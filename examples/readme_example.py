@@ -4,6 +4,7 @@ import ctl
 import ctl.gui
 from matplotlib import pyplot as plt
 
+
 def main():
     # create a cylinder as a volume
     volume = ctl.VoxelVolumeF.cylinder_x(radius=60.0,
@@ -23,8 +24,8 @@ def main():
     my_carm_setup = ctl.AcquisitionSetup(system, nb_views)
 
     # add a predefined trajectory to the setup from ctl.protocols
-    source_to_isocenter = 750.0 # mm is the standard unit for length dimensions
-    start_angle = ctl.deg2rad(42.0) # rad is the standard unit for angles
+    source_to_isocenter = 750.0  # mm is the standard unit for length dimensions
+    start_angle = ctl.deg2rad(42.0)  # rad is the standard unit for angles
     my_carm_setup.apply_preparation_protocol(ctl.protocols.WobbleTrajectory(source_to_isocenter,
                                                                             start_angle))
 
@@ -32,7 +33,7 @@ def main():
         sys.exit(-1)
 
     # configure a projector and project volume
-    my_projector = ctl.ocl.RayCasterProjector() # an ideal projector with default settings
+    my_projector = ctl.ocl.RayCasterProjector()  # an ideal projector with default settings
     projections = my_projector.configure_and_project(my_carm_setup, volume)
 
     # plot the projections
@@ -43,6 +44,7 @@ def main():
     proj20 = projections.numpy()[20, 0]
     # alternatively: proj20 = projections.view(20).module(0).numpy()
     _ = plt.imshow(proj20, cmap='gray'), plt.show()
+
 
 if __name__ == '__main__':
     main()

@@ -1,6 +1,7 @@
 import ctl
 from matplotlib import pyplot as plt
 
+
 def main():
     # create a water ball
     volume = ctl.SpectralVolumeData.ball(50., 0.5, 1.0, ctl.database.attenuation_model(
@@ -22,6 +23,7 @@ def main():
     # show projection #1
     proj = projections.view(1).module(0).numpy()
     _ = plt.imshow(proj, cmap='gray'), plt.show()
+
 
 if __name__ == '__main__':
     main()

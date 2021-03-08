@@ -3,11 +3,11 @@ import argparse
 import ctl
 import nrrd
 
+
 def main(path_to_nrrd):
     # load the nrrd file
     nrrd_volume, nrrd_header = nrrd.read(path_to_nrrd)
-    if 'spacings' not in nrrd_header or \
-        'units' not in nrrd_header:
+    if 'spacings' not in nrrd_header or 'units' not in nrrd_header:
         print('\'spacings\' or \'units\' not set. Assuming spacing of 1x1x1mm.')
         nrrd_header['spacings'] = [1.0]*3
         nrrd_header['units'] = ['mm']*3
@@ -24,8 +24,8 @@ def main(path_to_nrrd):
     setup = ctl.AcquisitionSetup(system, nb_views)
 
     # add a predefined trajectory to the setup from ctl.protocols
-    angle_span = ctl.deg2rad(200.0) # rad is the standard unit for angles
-    source_to_isocenter = 750.0 # mm is the standard unit for length dimensions
+    angle_span = ctl.deg2rad(200.0)  # rad is the standard unit for angles
+    source_to_isocenter = 750.0  # mm is the standard unit for length dimensions
     setup.apply_preparation_protocol(ctl.protocols.WobbleTrajectory(angle_span,
                                                                     source_to_isocenter))
     assert setup.is_valid()

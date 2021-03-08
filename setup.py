@@ -11,7 +11,8 @@ from setuptools.command.build_py import build_py
 
 from create_cmakelists import create_cmakelists
 
-class CMakeExtension(Extension): # pylint: disable=too-few-public-methods
+
+class CMakeExtension(Extension):  # pylint: disable=too-few-public-methods
     def __init__(self, name, sourcedir=''):
         Extension.__init__(self, name, sources=[])
         self.sourcedir = os.path.abspath(sourcedir)

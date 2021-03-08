@@ -3,6 +3,7 @@ import ctypes
 from ctypes.util import find_library
 import sys
 
+
 def _raise_if_wrong_env_qt():
     qt_lib_path = find_library('Qt5Core')
     if qt_lib_path is None:
@@ -13,6 +14,7 @@ def _raise_if_wrong_env_qt():
     qtver = ctypes.c_char_p(qt5core.qVersion()).value.decode()
     raise RuntimeError(f'Qt5 version must be >=5.15 (is {qtver}). '
                        'Consider removing Qt from your environment paths.')
+
 
 try:
     import _ctl
@@ -39,11 +41,14 @@ del db_source_dir
 
 __all__ = [name for name in dir(_ctl) if name[0] != '_' and name != 'gui']
 
+
 def _add_ctl_attr():
     for name in dir(_ctl):
         if name[0] == '_' or name == 'gui':
             continue
         globals()[name] = getattr(_ctl, name)
+
+
 _add_ctl_attr()
 del _add_ctl_attr
 

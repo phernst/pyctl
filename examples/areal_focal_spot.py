@@ -1,6 +1,7 @@
 import ctl
 from matplotlib import pyplot as plt
 
+
 def main():
     # define volume and acquisition setup (incl. system)
     volume = ctl.VoxelVolumeF.cube(100, 1.0, 0.02)
@@ -11,7 +12,7 @@ def main():
     acquisition_setup = ctl.AcquisitionSetup(system, 10)
     acquisition_setup.apply_preparation_protocol(ctl.protocols.ShortScanTrajectory(750.0))
 
-    simple_projector = ctl.ocl.RayCasterProjector() # our simple projector
+    simple_projector = ctl.ocl.RayCasterProjector()  # our simple projector
 
     # optional parameter settings for the projector
     # e.g. simple_projector.settings().ray_sampling = 0.1
@@ -32,6 +33,7 @@ def main():
     # show projection #0
     proj = projections.view(0).module(0).numpy()
     _ = plt.imshow(proj, cmap='gray'), plt.show()
+
 
 if __name__ == '__main__':
     main()

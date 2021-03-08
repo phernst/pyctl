@@ -1,6 +1,7 @@
 import ctl
 from matplotlib import pyplot as plt
 
+
 def main():
     # Construct the composite volume already containing the cube volume.
     volume = ctl.CompositeVolume(ctl.VoxelVolumeF.cube(150, 1.0, 0.02))
@@ -36,6 +37,7 @@ def main():
     # show projection #0
     proj = projections.view(0).module(0).numpy()
     _ = plt.imshow(proj, cmap='gray'), plt.show()
+
 
 if __name__ == '__main__':
     main()

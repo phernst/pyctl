@@ -5,6 +5,7 @@ IN_VOLUME_PATH = "path/to/volume.nrrd"
 PROJECTION_MATRICES_PATH = "path/to/projection_matrices.nrrd"
 OUT_PROJECTIONS_PATH = "path/to/projection_output.nrrd"
 
+
 def create_projection_matrices():
     # create a tubular system with a flat panel detector
     system = ctl.CTSystemBuilder.create_from_blueprint(ctl.blueprints.GenericTubularCT())
@@ -22,9 +23,11 @@ def create_projection_matrices():
                header={'encoding': 'raw'})
     print("Wrote projection matrices")
 
+
 def load_projection_matrices():
     nrrd_pmats, _ = nrrd.read(PROJECTION_MATRICES_PATH)
     return ctl.FullGeometry.from_numpy(nrrd_pmats.transpose())
+
 
 def main():
     # load volume
@@ -47,6 +50,7 @@ def main():
 
     # save projections
     nrrd.write(OUT_PROJECTIONS_PATH, projections.numpy().transpose())
+
 
 if __name__ == "__main__":
     main()
