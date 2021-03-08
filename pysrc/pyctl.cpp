@@ -51,7 +51,9 @@ void init_sparsevoxelvolume(py::module&);
 void init_spectralvolumedata(py::module&);
 
 void init_abstractvolumesparsifier(py::module&);
+void init_abstractvolumefilter(py::module&);
 void init_abstractprojectionfilter(py::module&);
+void init_regularizers(py::module&);
 void init_thresholdvolumesparsifier(py::module&);
 
 void init_abstractprojector(py::module&);
@@ -142,7 +144,9 @@ PYBIND11_MODULE(_ctl, m) {
     init_geometryencoder(m);
 
     init_abstractvolumesparsifier(m);
+    init_abstractvolumefilter(m);
     init_abstractprojectionfilter(m);
+    init_regularizers(m);
     init_thresholdvolumesparsifier(m);
 
     init_abstractreconstructor(m);

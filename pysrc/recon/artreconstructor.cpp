@@ -30,7 +30,7 @@ void init_artreconstructor(py::module& m)
             const VoxelVolume<float>&, AbstractProjector*, AbstractReconstructor*, uint)>
             (ARTReconstructor::computeRelaxationEstimate), "setup"_a, "target_volume"_a,
             "forward_projector"_a = nullptr, "backprojector"_a = nullptr, "nb_power_iter"_a = 1u)
-        .def("set_positivity_constrain_enabled", &ARTReconstructor::setPositivityConstraintEnabled,
+        .def("set_positivity_constraint_enabled", &ARTReconstructor::setPositivityConstraintEnabled,
             "enabled"_a)
         .def("set_regularization_enabled", &ARTReconstructor::setRegularizationEnabled,
             "enabled"_a)
@@ -44,10 +44,10 @@ void init_artreconstructor(py::module& m)
             (const AcquisitionSetup&,const VoxelVolume<float>&,uint)>
             (&ARTReconstructor::setRelaxationByEstimation),
             "setup"_a, "target_volume"_a, "nb_power_iter"_a = 1u)
-        // .def("set_regularizer", [](ARTReconstructor& self, PySharedPtr<AbstractVolumeFilter> reg, bool en)
-        // {
-        //     self.setRegularizer(reg.release_to_ctl(), en);
-        // }, "regularizer"_a, "enable_regularizer"_a = true) // TODO!
+        .def("set_regularizer", [](ARTReconstructor& self, PySharedPtr<AbstractVolumeFilter> reg, bool en)
+        {
+            self.setRegularizer(reg.release_to_ctl(), en);
+        }, "regularizer"_a, "enable_regularizer"_a = true)
         .def("set_subset_generator", [](ARTReconstructor& self, PySharedPtr<AbstractSubsetGenerator>& gen)
         {
             self.setSubsetGenerator(gen.release_to_ctl());
