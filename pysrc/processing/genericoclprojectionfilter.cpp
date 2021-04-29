@@ -1,5 +1,4 @@
-#include <pybind11/pybind11.h>
-#include <pybind11/stl.h>
+#include "pysrc/pybind_common.h"
 #include <processing/genericoclprojectionfilter.h>
 #include <img/projectiondata.h>
 #include <vector>

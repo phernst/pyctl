@@ -1,4 +1,4 @@
-#include <pybind11/pybind11.h>
+#include "pysrc/pybind_common.h"
 #include <img/spectralvolumedata.h>
 
 namespace py = pybind11;

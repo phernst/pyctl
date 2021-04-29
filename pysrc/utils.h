@@ -1,6 +1,6 @@
 #pragma once
 
-#include <pybind11/pybind11.h>
+#include "pysrc/pybind_common.h"
 
 template<typename T, unsigned Size>
 pybind11::tuple zero_tuple()

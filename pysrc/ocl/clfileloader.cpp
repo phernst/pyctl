@@ -1,5 +1,5 @@
 #include <ocl/clfileloader.h>
-#include <pybind11/pybind11.h>
+#include "pysrc/pybind_common.h"
 #include <QString>
 
 namespace py = pybind11;

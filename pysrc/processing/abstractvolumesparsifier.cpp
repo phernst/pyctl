@@ -1,4 +1,4 @@
-#include <pybind11/pybind11.h>
+#include "pysrc/pybind_common.h"
 #include <processing/abstractvolumesparsifier.h>
 
 namespace py = pybind11;

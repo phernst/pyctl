@@ -1,5 +1,4 @@
-#include <pybind11/pybind11.h>
-#include <pybind11/stl.h>
+#include "pysrc/pybind_common.h"
 #include <img/projectiondataview.h>
 
 namespace py = pybind11;

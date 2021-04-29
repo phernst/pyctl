@@ -1,4 +1,4 @@
-#include <pybind11/pybind11.h>
+#include "pysrc/pybind_common.h"
 #include <img/compositevolume.h>
 #include <img/sparsevoxelvolume.h>
 #include <projectors/projectorextension.h>

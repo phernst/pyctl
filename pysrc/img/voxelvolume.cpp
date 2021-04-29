@@ -1,4 +1,4 @@
-#include <pybind11/pybind11.h>
+#include "pysrc/pybind_common.h"
 #include <pybind11/numpy.h>
 #include <img/voxelvolume.h>
 

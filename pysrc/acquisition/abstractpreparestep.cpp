@@ -1,4 +1,4 @@
-#include <pybind11/pybind11.h>
+#include "pysrc/pybind_common.h"
 #include <acquisition/abstractpreparestep.h>
 #include <acquisition/acquisitionsetup.h>
 

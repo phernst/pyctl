@@ -1,4 +1,4 @@
-#include <pybind11/pybind11.h>
+#include "pysrc/pybind_common.h"
 #include <gui/widgets/pipelinecomposer.h>
 #include <projectors/projectionpipeline.h>
 #include <pysrc/qt_helper.h>
