@@ -30,8 +30,7 @@ void init_viewgeometry(py::module& m)
         .def(py::init<uint>(), "nb_modules"_a)
         .def(py::init([](const std::vector<mat::ProjectionMatrix>& pMats)
         {
-            // TODO: don't use fromStdVector
-            return SingleViewGeometry(QVector<mat::ProjectionMatrix>::fromStdVector(pMats));
+            return SingleViewGeometry{{ pMats.cbegin(), pMats.cend() }};
         }), "p_mats"_a)
         .def("append", [](SingleViewGeometry& self, const mat::ProjectionMatrix& pMat)
         {
@@ -39,8 +38,7 @@ void init_viewgeometry(py::module& m)
         }, "p_mat")
         .def("append", [](SingleViewGeometry& self, const std::vector<mat::ProjectionMatrix>& pMats)
         {
-            // TODO: don't use fromStdVector
-            self.append(QVector<mat::ProjectionMatrix>::fromStdVector(pMats));
+            self.append({ pMats.cbegin(), pMats.cend() });
         }, "p_mat")
         .def("append", [](SingleViewGeometry& self, const SingleViewGeometry& other)
         {
@@ -104,8 +102,7 @@ void init_viewgeometry(py::module& m)
         .def(py::init<uint>(), "nb_views"_a)
         .def(py::init([](const std::vector<SingleViewGeometry>& pMats)
         {
-            // TODO: don't use fromStdVector
-            return FullGeometry(QVector<SingleViewGeometry>::fromStdVector(pMats));
+            return FullGeometry{{ pMats.cbegin(), pMats.cend() }};
         }), "p_mats"_a)
         .def("append", [](FullGeometry& self, const SingleViewGeometry& pMat)
         {
@@ -113,8 +110,7 @@ void init_viewgeometry(py::module& m)
         }, "p_mat")
         .def("append", [](FullGeometry& self, const std::vector<SingleViewGeometry>& pMats)
         {
-            // TODO: don't use fromStdVector
-            self.append(QVector<SingleViewGeometry>::fromStdVector(pMats));
+            self.append({ pMats.cbegin(), pMats.cend() });
         }, "p_mat")
         .def("append", [](FullGeometry& self, const FullGeometry& other)
         {

@@ -45,11 +45,10 @@ void init_genericdetector(py::module& m)
             {
                 throw std::invalid_argument("pixel_dimensions must be a tuple of 2 elements");
             }
-            // TODO: don't use fromStdVector
             return {
                 { nbPixelPerModule[0].cast<int>(), nbPixelPerModule[1].cast<int>() },
                 { pixelDimensions[0].cast<double>(), pixelDimensions[1].cast<double>() },
-                QVector<ModLoc>::fromStdVector(moduleLocations),
+                { moduleLocations.cbegin(), moduleLocations.cend() },
                 QString::fromStdString(name)
             };
         }), "nb_pixel_per_module"_a, "pixel_dimensions"_a, "module_locations"_a,
@@ -57,8 +56,7 @@ void init_genericdetector(py::module& m)
         .def("info", [](const GenericDetector& self) { return self.info().toStdString(); })
         .def("set_module_locations", [](GenericDetector& self, const std::vector<ModLoc>& ml)
         {
-            // TODO: don't use fromStdVector
-            self.setModuleLocations(QVector<ModLoc>::fromStdVector(ml));
+            self.setModuleLocations({ ml.cbegin(), ml.cend() });
         }, "module_locations"_a)
         .def("set_pixel_size", [](GenericDetector& self, py::tuple size)
         {

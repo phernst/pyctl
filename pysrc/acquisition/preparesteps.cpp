@@ -126,7 +126,7 @@ void init_preparesteps(py::module& m)
         .def("set_module_locations",
             [](pr::GenericDetectorParam& self, const std::vector<mat::Location>& locs)
         {
-            self.setModuleLocations(QVector<mat::Location>(locs.cbegin(), locs.cend()));
+            self.setModuleLocations({ locs.cbegin(), locs.cend() });
         }, "module_locations"_a)
         .def("set_pixel_size", [](pr::GenericDetectorParam& self, py::tuple size)
         {
@@ -143,7 +143,7 @@ void init_preparesteps(py::module& m)
         .def_static("for_module_locations", [](const std::vector<mat::Location>& locs)
         {
             return pr::GenericDetectorParam::forModuleLocations(
-                QVector<mat::Location>(locs.cbegin(), locs.cend()));
+                { locs.cbegin(), locs.cend() });
         }, "module_locations"_a)
         .def_static("for_pixel_size", [](py::tuple size)
         {
