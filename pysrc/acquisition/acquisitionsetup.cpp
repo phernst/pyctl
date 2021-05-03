@@ -23,6 +23,8 @@ void init_acquisitionsetup(py::module& m)
         .def("prepare_view", &AcquisitionSetup::prepareView, "view_nb"_a)
         .def("remove_all_prepare_steps", &AcquisitionSetup::removeAllPrepareSteps,
             "keep_time_stamps"_a = false)
+        .def("remove_all_prepare_steps_of_type", &AcquisitionSetup::removeAllPrepareStepsOfType,
+            "prepare_step_type"_a)
         .def("remove_all_views", &AcquisitionSetup::removeAllViews)
         .def("reset_system", static_cast<bool(AcquisitionSetup::*)(const CTSystem&)>
             (&AcquisitionSetup::resetSystem), "system")
@@ -48,6 +50,7 @@ void init_acquisitionsetup(py::module& m)
             rvp::reference_internal)
         .def("index_of_prepare_step", &AcView::indexOfPrepareStep, "prepare_step_type"_a,
             "search_from_back"_a = true)
+        .def("has_prepare_step", &AcView::hasPrepareStep, "prepare_step_type"_a) // TODO: type
         .def("replace_prepare_step", static_cast<bool(AcView::*)(int,PrepStep)>
             (&AcView::replacePrepareStep), "new_prepare_step"_a, "search_from_back"_a = true)
         .def("remove_all_prepare_steps", &AcView::removeAllPrepareSteps, "prepare_step_type"_a)

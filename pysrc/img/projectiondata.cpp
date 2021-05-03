@@ -33,6 +33,7 @@ void init_projectiondata(py::module& m)
         })
         .def("max", &ProjectionData::max)
         .def("min", &ProjectionData::min)
+        .def("split", &ProjectionData::split, "layout"_a)
         .def("to_vector", &ProjectionData::toVector)
         .def("nb_views", &ProjectionData::nbViews)
         .def("view", static_cast<SingleViewData&(ProjectionData::*)(uint)>

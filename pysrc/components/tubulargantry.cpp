@@ -30,6 +30,9 @@ void init_tubulargantry(py::module& m)
             "rotation_angle"_a = 0.0, "pitch_position"_a = 0.0, "tilt_angle"_a = 0.0,
             "name"_a = TubularGantry::defaultName().toStdString())
         .def("info", [](const TubularGantry& self) { return self.info().toStdString(); })
+        .def("pitch_position", &TubularGantry::pitchPosition)
+        .def("rotation_angle", &TubularGantry::rotationAngle)
+        .def("tiltAngle", &TubularGantry::tiltAngle)
         .def("set_pitch_position", &TubularGantry::setPitchPosition, "position"_a)
         .def("set_rotation_angle", &TubularGantry::setRotationAngle, "angle"_a)
         .def("set_tilt_angle", &TubularGantry::setTiltAngle, "angle");
