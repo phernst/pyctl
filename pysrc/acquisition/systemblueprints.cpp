@@ -32,4 +32,13 @@ void init_systemblueprints(py::module& m, py::module& bp)
         {
             return self.systemName().toStdString();
         });
+    py::class_<blueprints::ArtisQ, AbstractCTSystemBlueprint>(bp, "ArtisQ")
+        .def(py::init<DetectorBinning>(), "binning"_a = DetectorBinning::Binning2x2)
+        .def("detector", &blueprints::ArtisQ::detector, rvp::reference)
+        .def("gantry", &blueprints::ArtisQ::gantry, rvp::reference)
+        .def("source", &blueprints::ArtisQ::source, rvp::reference)
+        .def("system_name", [](const blueprints::ArtisQ& self)
+        {
+            return self.systemName().toStdString();
+        });
 }
