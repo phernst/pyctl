@@ -113,12 +113,12 @@ void init_preparesteps(py::module& m)
     py::class_<pr::XrayTubeParam, pr::SourceParam>(m, "XrayTubeParam")
         .def(py::init<>())
         .def("set_tube_voltage", &pr::XrayTubeParam::setTubeVoltage, "voltage"_a)
-        .def("set_emission_current", &pr::XrayTubeParam::setEmissionCurrent, "current"_a)
+        .def("set_milliampere_seconds", &pr::XrayTubeParam::setMilliampereSeconds, "current"_a)
         .def("prepare", &pr::XrayTubeParam::prepare, "system"_a)
         .def("is_applicable_to", &pr::XrayTubeParam::isApplicableTo, "system"_a)
         .def_static("for_tube_voltage", &pr::XrayTubeParam::forTubeVoltage,
             "voltage"_a)
-        .def_static("for_emission_current", &pr::XrayTubeParam::forEmissionCurrent,
+        .def_static("for_milliampere_seconds", &pr::XrayTubeParam::forMilliampereSeconds,
             "mas"_a);
 
     py::class_<pr::GenericDetectorParam, AbstractPrepareStep>(m, "GenericDetectorParam")
