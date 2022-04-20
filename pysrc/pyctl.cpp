@@ -23,6 +23,7 @@ void init_genericgantry(py::module&);
 void init_genericsource(py::module&);
 void init_geometrydecoder(py::module&);
 void init_geometryencoder(py::module&);
+void init_radiationencoder(py::module&);
 void init_viewgeometry(py::module&);
 void init_tubulargantry(py::module&);
 void init_xraytube(py::module&);
@@ -142,6 +143,7 @@ PYBIND11_MODULE(_ctl, m) {
     init_viewgeometry(m);
     init_geometrydecoder(m);
     init_geometryencoder(m);
+    init_radiationencoder(m);
 
     init_abstractvolumesparsifier(m);
     init_abstractvolumefilter(m);
