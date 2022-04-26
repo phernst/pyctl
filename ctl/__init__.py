@@ -1,7 +1,14 @@
-from pkg_resources import resource_filename
 import ctypes
 from ctypes.util import find_library
 import sys
+from pkg_resources import resource_filename
+
+
+def _raise_if_no_opencl():
+    ocl_lib_path = find_library('OpenCL')
+    if ocl_lib_path is not None:
+        return
+    raise RuntimeError('PyCTL depends on OpenCL but it could not be found.')
 
 
 def _raise_if_wrong_env_qt():
@@ -13,13 +20,15 @@ def _raise_if_wrong_env_qt():
     qt5core.qVersion.restype = ctypes.c_char_p
     qtver = ctypes.c_char_p(qt5core.qVersion()).value.decode()
     # TODO: the exception should show the Qt version that this package was compiled with
-    raise RuntimeError(f'Qt5 version must be >=5.15 (is {qtver}). '
-                       'Consider removing Qt from your environment paths.')
+    raise RuntimeError(
+        f'Qt5 version must be >=5.15 (is {qtver}). '
+        'Consider removing Qt from your environment paths.')
 
 
 try:
     import _ctl
 except ImportError:
+    _raise_if_no_opencl()
     _raise_if_wrong_env_qt()
 
     from PySide2.QtWidgets import QApplication
